@@ -1,8 +1,5 @@
 package com.superior.model;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.superior.calculo.EcuacionDosIncognitasUtils;
 import com.superior.model.dto.AproxBase;
 import com.superior.model.dto.AproxData;
@@ -13,7 +10,6 @@ public class AproxLineal extends AproxBase implements AproximacionOperaciones {
 
 	public AproxLineal(AproxTable tablaValores, Integer cantidadDecimales) {
 		super(tablaValores, cantidadDecimales);
-
 	}
 
 	public void calcularFuncionAproximacion() {
@@ -21,13 +17,6 @@ public class AproxLineal extends AproxBase implements AproximacionOperaciones {
 		ecuacion.calcular(tablaValores.sumatoriaXCuadrado(), tablaValores.sumatoriaX(), tablaValores.sumatoriaXY(), tablaValores.sumatoriaX(), tablaValores.sumatoria1(), tablaValores.sumatoriaY());
 		A = ecuacion.X();
 		B = ecuacion.Y();
-	}
-
-	public Double aplicarFuncion(Double x) {
-		if (A == null || B == null) {
-			calcularFuncionAproximacion();
-		}
-		return num.redondear((A * x + B), cantidadDecimales);
 	}
 
 	public String[][] obtenerTablaCalculos() {
@@ -45,31 +34,15 @@ public class AproxLineal extends AproxBase implements AproximacionOperaciones {
 	}
 
 	public String[] obtenerFilaSumarizadora() {
-
 		return new String[] { "S", tablaValores.sumatoriaX().toString(), tablaValores.sumatoriaY().toString(), tablaValores.sumatoriaXY().toString(), tablaValores.sumatoriaXCuadrado().toString() };
 	}
 
-	public List<AproxData> obtenerPuntosFuncionAproximacionParaGraficar() {
-		List<AproxData> puntosGrafica = new ArrayList<AproxData>();
-		for (AproxData punto : tablaValores.getDatos()) {
-			Double x = punto.x();
-			Double y = aplicarFuncion(x);
-			AproxData puntoGrafica = new AproxData(x, y, cantidadDecimales);
-			puntosGrafica.add(puntoGrafica);
-		}
-		return puntosGrafica;
-	}
-
 	public String[] tablaCabecera() {
-
 		return new String[] { "i", "X", "Y", "X . Y", "X^2" };
 	}
 
 	public String getNombre() {
-
 		return "Lineal";
 	}
-
-	
 
 }

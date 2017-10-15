@@ -47,9 +47,7 @@ public class AproximacionController implements IAproximacionController {
 			x.add(punto.x());
 			y.add(punto.y());
 		}
-
 		for (AproxData punto : datos.getDatos()) {
-
 			yCoordenada.add(punto.y());
 		}
 		new GraficoFuncionConCoordenadas(x, y, x, yCoordenada);
@@ -105,7 +103,7 @@ public class AproximacionController implements IAproximacionController {
 
 		if (form.getChkParabola()) {
 			contadorCheckeos++;
-			aproximaciones.add(AproxFactory.crearAproximacion("LINEAL", form.getTV(), form.getDecimales()));
+			aproximaciones.add(AproxFactory.crearAproximacion("PARABOLA", form.getTV(), form.getDecimales()));
 		}
 
 		if (form.getChkPotencial()) {

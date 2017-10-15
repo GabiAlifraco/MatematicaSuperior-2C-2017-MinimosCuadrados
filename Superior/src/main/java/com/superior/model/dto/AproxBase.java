@@ -61,11 +61,27 @@ public abstract class AproxBase implements Comparable<AproximacionOperaciones> {
 		return valores;
 	}
 
-	public abstract Double aplicarFuncion(Double x);
-
-	
-
 	public int compareTo(AproximacionOperaciones o) {
 		return this.minimoErrorCometido().compareTo(o.minimoErrorCometido());
 	}
+
+	public List<AproxData> obtenerPuntosFuncionAproximacionParaGraficar() {
+		List<AproxData> puntosGrafica = new ArrayList<AproxData>();
+		for (AproxData punto : tablaValores.getDatos()) {
+			Double x = punto.x();
+			Double y = aplicarFuncion(x);
+			AproxData puntoGrafica = new AproxData(x, y, cantidadDecimales);
+			puntosGrafica.add(puntoGrafica);
+		}
+		return puntosGrafica;
+	}
+
+	public Double aplicarFuncion(Double x) {
+		if (A == null || B == null) {
+			calcularFuncionAproximacion();
+		}
+		return num.redondear((A * x + B), cantidadDecimales);
+	}
+
+	public abstract void calcularFuncionAproximacion();
 }

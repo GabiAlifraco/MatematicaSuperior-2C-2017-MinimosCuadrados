@@ -51,7 +51,7 @@ public class AproximacionPantalla extends javax.swing.JFrame {
 	}
 
 	private String obtenerTipoAproximacion() {
-		String[] aproximacionesPantalla = new String[] { "Recta de mínimos cuadrados", "Parábola de mínimos cuadrados", "Aproximación Exponencial", "Aproximación Potencial", "Aproximación Hipérbola" };
+		String[] aproximacionesPantalla = new String[] { "Recta de mï¿½nimos cuadrados", "Parï¿½bola de mï¿½nimos cuadrados", "Aproximaciï¿½n Exponencial", "Aproximaciï¿½n Potencial", "Aproximaciï¿½n Hipï¿½rbola" };
 		String[] tipoAproximacion = new String[] { "LINEAL", "PARABOLA", "EXPONENCIAL", "POTENCIAL", "HIPERBOLA" };
 
 		String tipoAproximacionElegida = (String) this.cmbFunciones.getSelectedItem();
@@ -80,15 +80,15 @@ public class AproximacionPantalla extends javax.swing.JFrame {
 		getContentPane().setLayout(null);
 
 		jLabel2.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-		jLabel2.setText("Tipo de Aproximación");
+		jLabel2.setText("Tipo de Aproximaciï¿½n");
 		getContentPane().add(jLabel2);
 		jLabel2.setBounds(80, 80, 240, 20);
 
-		cmbFunciones.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Seleccione", "Recta de mínimos cuadrados", "Parábola de mínimos cuadrados", "Aproximación Exponencial", "Aproximación Potencial", "Aproximación Hipérbola" }));
+		cmbFunciones.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Seleccione", "Recta de mï¿½nimos cuadrados", "Parï¿½bola de mï¿½nimos cuadrados", "Aproximaciï¿½n Exponencial", "Aproximaciï¿½n Potencial", "Aproximaciï¿½n Hipï¿½rbola" }));
 		getContentPane().add(cmbFunciones);
 		cmbFunciones.setBounds(80, 110, 250, 20);
 
-		cmdVisualizarAproximacion.setText("Visualizar Aproximación");
+		cmdVisualizarAproximacion.setText("Visualizar Aproximaciï¿½n");
 		cmdVisualizarAproximacion.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
 				cmdVisualizarAproximacionActionPerformed(evt);
@@ -97,7 +97,7 @@ public class AproximacionPantalla extends javax.swing.JFrame {
 		getContentPane().add(cmdVisualizarAproximacion);
 		cmdVisualizarAproximacion.setBounds(70, 170, 280, 23);
 
-		cmdVerCalculos.setText("Ver Cálculos");
+		cmdVerCalculos.setText("Ver Cï¿½lculos");
 		cmdVerCalculos.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
 				cmdVerCalculosActionPerformed(evt);
@@ -106,7 +106,7 @@ public class AproximacionPantalla extends javax.swing.JFrame {
 		getContentPane().add(cmdVerCalculos);
 		cmdVerCalculos.setBounds(70, 200, 280, 23);
 
-		cmdVisualizarAproximacionCoordenadas.setText("Visualizar Aproximación con Coordenadas");
+		cmdVisualizarAproximacionCoordenadas.setText("Visualizar Aproximaciï¿½n con Coordenadas");
 		cmdVisualizarAproximacionCoordenadas.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
 				cmdVisualizarAproximacionCoordenadasActionPerformed(evt);

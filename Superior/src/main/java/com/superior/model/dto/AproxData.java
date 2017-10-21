@@ -28,11 +28,17 @@ public class AproxData {
 	}
 
 	public Double xCuadrado() {
-		return
-
-		num.redondear(Math.pow(x, 2), cantidadDecimales);
+		return num.redondear(Math.pow(x, 2), cantidadDecimales);
 	}
-
+	public Double lnY(){
+		return num.redondear(Math.log(y), cantidadDecimales);
+	}
 	
-
+	public Double XlnY(){
+		return num.redondear(x * lnY(), cantidadDecimales);
+	}
+	
+	
+	
+	
 }

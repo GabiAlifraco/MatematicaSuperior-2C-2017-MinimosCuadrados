@@ -61,5 +61,22 @@ public class AproxTable {
 		}
 		return sumatoria;
 	}
+	public Double sumatoriaXlnY() {
+		Double sumatoria = 0D;
+		for (AproxData dato : datos) {
+			sumatoria += num.redondear(dato.XlnY(), cantidadDecimales);
+		}
+		return sumatoria;
+	}
+	
+	public Double sumatorialnY() {
+		Double sumatoria = 0D;
+		for (AproxData dato : datos) {
+			sumatoria += num.redondear(dato.lnY(), cantidadDecimales);
+		}
+		return sumatoria;
+	}
+	
+	
 
 }

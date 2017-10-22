@@ -1,8 +1,10 @@
 package com.superior.model;
 
 import com.superior.model.dto.AproxBase;
+import com.superior.model.dto.AproxData;
 import com.superior.model.dto.AproxTable;
 import com.superior.model.dto.AproximacionOperaciones;
+import com.superior.calculo.EcuacionDosIncognitasUtils;
 
 public class AproxPotencial extends AproxBase implements AproximacionOperaciones {
 
@@ -11,28 +13,47 @@ public class AproxPotencial extends AproxBase implements AproximacionOperaciones
 	}
 
 	public String[][] obtenerTablaCalculos() {
-		// TODO Auto-generated method stub
-		return null;
+		String[][] valores = new String[tablaValores.getDatos().size()][7];
+		int contador = 0;
+		for (AproxData datos : tablaValores.getDatos()) {
+			valores[contador][0] = (contador + 1) + "";
+			valores[contador][1] = datos.x().toString();
+			valores[contador][2] = datos.y().toString();
+			valores[contador][3] = datos.lnX().toString();
+			valores[contador][4] = datos.lnXCuadrado().toString();
+			valores[contador][5] = datos.lnY().toString();
+			valores[contador][6] = datos.lnXlnY().toString();
+			contador++;
+		}
+		return valores;
 	}
-
+	
 	public String[] obtenerFilaSumarizadora() {
-		// TODO Auto-generated method stub
-		return null;
+		return new String[] { "\u03A3", 
+				tablaValores.sumatoriaX().toString(),
+				tablaValores.sumatoriaY().toString(),
+				tablaValores.sumatorialnX().toString(),
+				tablaValores.sumatorialnXCuadrado().toString(),
+				tablaValores.sumatorialnY().toString(),
+				tablaValores.sumatorialnXlnY().toString()};
 	}
 
 	public String[] tablaCabecera() {
-		// TODO Auto-generated method stub
-		return null;
+		
+		return new String[] { "i", "X", "Y", "ln(X)", "(ln(X))\u00B2", "ln(Y)", "ln(X).ln(Y)"};
 	}
 
 	public String getNombre() {
-		// TODO Auto-generated method stub
-		return null;
+		return "Potencial";
 	}
 
 	@Override
 	public void calcularFuncionAproximacion() {
-		// TODO Auto-generated method stub
+		EcuacionDosIncognitasUtils ecuacion = new EcuacionDosIncognitasUtils();
+		ecuacion.calcular(tablaValores.sumatorialnXCuadrado(), tablaValores.sumatorialnX(), tablaValores.sumatorialnXlnY(),
+				tablaValores.sumatorialnX(), tablaValores.sumatoria1(), tablaValores.sumatorialnY());
+		A =num.redondear( ecuacion.X(), cantidadDecimales); 
+		B =num.redondear( Math.exp(ecuacion.Y()), cantidadDecimales);
 		
 	}
 

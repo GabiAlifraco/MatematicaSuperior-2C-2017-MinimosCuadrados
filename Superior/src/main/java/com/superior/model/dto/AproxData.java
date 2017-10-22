@@ -34,10 +34,21 @@ public class AproxData {
 		return num.redondear(Math.log(y), cantidadDecimales);
 	}
 	
+	public Double lnX(){
+		return num.redondear(Math.log(x), cantidadDecimales);
+	}
+	
+	public Double lnXCuadrado(){
+		return num.redondear(Math.pow(lnX(),2), cantidadDecimales);
+	}
+	
 	public Double XlnY(){
 		return num.redondear(x * lnY(), cantidadDecimales);
 	}
 	
+	public Double lnXlnY(){
+		return num.redondear(lnX() * lnY(), cantidadDecimales);
+	}
 	
 	
 	

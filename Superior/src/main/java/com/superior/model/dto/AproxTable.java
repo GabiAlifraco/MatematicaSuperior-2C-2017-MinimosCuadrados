@@ -76,7 +76,27 @@ public class AproxTable {
 		}
 		return sumatoria;
 	}
+	public Double sumatorialnX() {
+		Double sumatoria = 0D;
+		for (AproxData dato : datos) {
+			sumatoria += num.redondear(dato.lnX(), cantidadDecimales);
+		}
+		return sumatoria;
+	}
 	
+	public Double sumatorialnXCuadrado() {
+		Double sumatoria = 0D;
+		for (AproxData dato : datos) {
+			sumatoria += num.redondear(dato.lnXCuadrado(), cantidadDecimales);
+		}
+		return sumatoria;
+	}
 	
-
+	public Double sumatorialnXlnY() {
+		Double sumatoria = 0D;
+		for (AproxData dato : datos) {
+			sumatoria += num.redondear(dato.lnXlnY(), cantidadDecimales);
+		}
+		return sumatoria;
+	}
 }

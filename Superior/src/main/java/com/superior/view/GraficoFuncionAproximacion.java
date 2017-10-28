@@ -59,7 +59,7 @@ public class GraficoFuncionAproximacion extends javax.swing.JFrame {
 		// XYSeries es una clase que viene con el paquete JFreeChart
 		// funciona como un arreglo con un poco mas de posibilidades
 
-		XYSeries series = new XYSeries("titulo de la serie");
+		XYSeries series = new XYSeries("Aproximacion " + tipoFuncion);
 		// como su nombre lo indica el primer valor sera asignado al eje X
 		// y el segundo al eje Y
 

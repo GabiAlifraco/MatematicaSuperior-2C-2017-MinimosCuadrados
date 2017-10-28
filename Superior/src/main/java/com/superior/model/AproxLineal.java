@@ -14,9 +14,10 @@ public class AproxLineal extends AproxBase implements AproximacionOperaciones {
 
 	public void calcularFuncionAproximacion() {
 		EcuacionDosIncognitasUtils ecuacion = new EcuacionDosIncognitasUtils();
-		ecuacion.calcular(tablaValores.sumatoriaXCuadrado(), tablaValores.sumatoriaX(), tablaValores.sumatoriaXY(), tablaValores.sumatoriaX(), tablaValores.sumatoria1(), tablaValores.sumatoriaY());
+		ecuacion.calcular(tablaValores.sumatoriaXCuadrado(), tablaValores.sumatoriaX(), tablaValores.sumatoriaXY(), tablaValores.sumatoriaX(), tablaValores.sumatoria1(), tablaValores.sumatoriaY(),cantidadDecimales);
 		A = ecuacion.X();
 		B = ecuacion.Y();
+		this.detalleCalculo = ecuacion.detalleCalculo();
 	}
 
 	public String[][] obtenerTablaCalculos() {
@@ -43,6 +44,11 @@ public class AproxLineal extends AproxBase implements AproximacionOperaciones {
 
 	public String getNombre() {
 		return "Lineal";
+	}
+	@Override
+	protected Double funcion( double valorX) {
+	
+		return A *valorX + B ;
 	}
 
 }

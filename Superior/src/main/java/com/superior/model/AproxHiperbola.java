@@ -35,5 +35,10 @@ public class AproxHiperbola extends AproxBase implements AproximacionOperaciones
 		// TODO Auto-generated method stub
 
 	}
+	@Override
+	protected Double funcion( double valorX) {
+	
+		return A/(valorX+B);
+	}
 
 }

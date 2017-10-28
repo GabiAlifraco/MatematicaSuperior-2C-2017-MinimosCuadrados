@@ -24,4 +24,6 @@ public interface AproximacionOperaciones extends Comparable<AproximacionOperacio
 	public List<Double> obtenerColumnaFuncionAplicada() throws Exception;
 
 	public String getNombre();
+	
+	public String detalleCalculo();
 }

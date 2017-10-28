@@ -33,7 +33,7 @@ public class AproxExponencial extends AproxBase implements AproximacionOperacion
 	}
 
 	public String[] tablaCabecera() {
-		return new String[] { "i", "X", "Y", "X . ln(Y)", "X\u00B2","ln(Y)" };
+		return new String[] { "i", "X", "Y", "X . ln(Y)", "X\u00B2", "ln(Y)" };
 	}
 
 	public String getNombre() {
@@ -42,13 +42,18 @@ public class AproxExponencial extends AproxBase implements AproximacionOperacion
 
 	@Override
 	public void calcularFuncionAproximacion() {
-		
+
 		EcuacionDosIncognitasUtils ecuacion = new EcuacionDosIncognitasUtils();
-		ecuacion.calcular(tablaValores.sumatoriaXCuadrado(), tablaValores.sumatoriaX(), tablaValores.sumatoriaXlnY(), tablaValores.sumatoriaX(), tablaValores.sumatoria1(), tablaValores.sumatorialnY());
-		A =num.redondear( ecuacion.X(), cantidadDecimales); 
-		B =num.redondear( Math.exp(ecuacion.Y()), cantidadDecimales);
+		ecuacion.calcular(tablaValores.sumatoriaXCuadrado(), tablaValores.sumatoriaX(), tablaValores.sumatoriaXlnY(), tablaValores.sumatoriaX(), tablaValores.sumatoria1(), tablaValores.sumatorialnY(),cantidadDecimales);
+		A = num.redondear(ecuacion.X(), cantidadDecimales);
+		B = num.redondear(Math.exp(ecuacion.Y()), cantidadDecimales);
+		this.detalleCalculo = ecuacion.detalleCalculo();
 	}
 
-	
+	@Override
+	protected Double funcion(double valorX) {
+
+		return B * Math.pow(Math.E, A * valorX);
+	}
 
 }

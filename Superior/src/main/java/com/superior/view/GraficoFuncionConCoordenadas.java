@@ -63,12 +63,12 @@ public class GraficoFuncionConCoordenadas extends javax.swing.JFrame {
 
 	public BufferedImage creaImagen() {
 
-		final XYSeries serie1 = new XYSeries("Puntos Ingresadas");
+		final XYSeries serie1 = new XYSeries("Función Aproximada");
 		for (int i = 0; i < x.size(); i++) {
 			serie1.add(x.get(i), y.get(i));
 		}
 
-		final XYSeries serie2 = new XYSeries("Función Aproximada");
+		final XYSeries serie2 = new XYSeries("Puntos Ingresados");
 		for (int i = 0; i < xCoordenada.size(); i++) {
 			serie2.add(xCoordenada.get(i), yCoordenada.get(i));
 		}

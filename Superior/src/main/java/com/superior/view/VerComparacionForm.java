@@ -127,7 +127,7 @@ public class VerComparacionForm extends javax.swing.JFrame {
 		cmbVolver.setBounds(500, 369, 90, 23);
 
 		lblMejorAproximacion = new javax.swing.JLabel();
-		lblMejorAproximacion.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+		lblMejorAproximacion.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
 		lblMejorAproximacion.setText("jLabel2");
 		getContentPane().add(lblMejorAproximacion);
 		lblMejorAproximacion.setBounds(20, 110, 580, 22);

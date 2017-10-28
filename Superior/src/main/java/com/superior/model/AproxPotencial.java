@@ -27,20 +27,14 @@ public class AproxPotencial extends AproxBase implements AproximacionOperaciones
 		}
 		return valores;
 	}
-	
+
 	public String[] obtenerFilaSumarizadora() {
-		return new String[] { "\u03A3", 
-				tablaValores.sumatoriaX().toString(),
-				tablaValores.sumatoriaY().toString(),
-				tablaValores.sumatorialnX().toString(),
-				tablaValores.sumatorialnXCuadrado().toString(),
-				tablaValores.sumatorialnY().toString(),
-				tablaValores.sumatorialnXlnY().toString()};
+		return new String[] { "\u03A3", tablaValores.sumatoriaX().toString(), tablaValores.sumatoriaY().toString(), tablaValores.sumatorialnX().toString(), tablaValores.sumatorialnXCuadrado().toString(), tablaValores.sumatorialnY().toString(), tablaValores.sumatorialnXlnY().toString() };
 	}
 
 	public String[] tablaCabecera() {
-		
-		return new String[] { "i", "X", "Y", "ln(X)", "(ln(X))\u00B2", "ln(Y)", "ln(X).ln(Y)"};
+
+		return new String[] { "i", "X", "Y", "ln(X)", "(ln(X))\u00B2", "ln(Y)", "ln(X).ln(Y)" };
 	}
 
 	public String getNombre() {
@@ -50,13 +44,16 @@ public class AproxPotencial extends AproxBase implements AproximacionOperaciones
 	@Override
 	public void calcularFuncionAproximacion() {
 		EcuacionDosIncognitasUtils ecuacion = new EcuacionDosIncognitasUtils();
-		ecuacion.calcular(tablaValores.sumatorialnXCuadrado(), tablaValores.sumatorialnX(), tablaValores.sumatorialnXlnY(),
-				tablaValores.sumatorialnX(), tablaValores.sumatoria1(), tablaValores.sumatorialnY());
-		A =num.redondear( ecuacion.X(), cantidadDecimales); 
-		B =num.redondear( Math.exp(ecuacion.Y()), cantidadDecimales);
-		
+		ecuacion.calcular(tablaValores.sumatorialnXCuadrado(), tablaValores.sumatorialnX(), tablaValores.sumatorialnXlnY(), tablaValores.sumatorialnX(), tablaValores.sumatoria1(), tablaValores.sumatorialnY(),cantidadDecimales);
+		A = ecuacion.X();
+		B = num.redondear(Math.exp(ecuacion.Y()), cantidadDecimales);
+		this.detalleCalculo = ecuacion.detalleCalculo();
 	}
 
-	
+	@Override
+	protected Double funcion(double valorX) {
+
+		return A * Math.pow(valorX, B);
+	}
 
 }

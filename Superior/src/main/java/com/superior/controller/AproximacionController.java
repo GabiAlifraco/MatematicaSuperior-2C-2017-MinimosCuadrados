@@ -42,7 +42,7 @@ public class AproximacionController implements IAproximacionController {
 		try {
 			DefaultTableModel dtm = new DefaultTableModel(aproximacion.obtenerTablaCalculos(), aproximacion.tablaCabecera());
 			dtm.addRow(aproximacion.obtenerFilaSumarizadora());
-			new VistaCalculosForm(dtm);
+			new VistaCalculosForm(dtm,aproximacion.detalleCalculo());
 		} catch (Exception e) {
 			JOptionPane.showMessageDialog(null, "No se puede calcular la aproximacion " + aproximacion.getNombre() + " con los datos ingresados");
 		}

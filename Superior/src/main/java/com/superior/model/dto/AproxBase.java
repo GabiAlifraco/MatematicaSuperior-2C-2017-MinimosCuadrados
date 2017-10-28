@@ -12,6 +12,7 @@ public abstract class AproxBase implements Comparable<AproximacionOperaciones> {
 
 	protected Double A;
 	protected Double B;
+	protected String detalleCalculo;
 
 	protected Integer cantidadDecimales;
 	protected NumberUtils num = new NumberUtils();
@@ -54,7 +55,7 @@ public abstract class AproxBase implements Comparable<AproximacionOperaciones> {
 		return erores;
 	}
 
-	public List<Double> obtenerColumnaFuncionAplicada() throws Exception{
+	public List<Double> obtenerColumnaFuncionAplicada() throws Exception {
 		List<Double> valores = new ArrayList<Double>();
 		for (AproxData punto : tablaValores.getDatos()) {
 			Double x = punto.x();
@@ -98,10 +99,19 @@ public abstract class AproxBase implements Comparable<AproximacionOperaciones> {
 				throw new Exception("No es posible para los datos ingresados calcular una aproximación " + this.getNombre());
 			}
 		}
-		return num.redondear((A * x + B), cantidadDecimales);
+		return num.redondear(funcion(x), cantidadDecimales);
 	}
 
 	public abstract void calcularFuncionAproximacion();
 
 	public abstract String getNombre();
+
+	protected abstract Double funcion(double valorX);
+
+	public String detalleCalculo() {
+		if(detalleCalculo==null){
+			calcularFuncionAproximacion();
+		}
+		return detalleCalculo;
+	}
 }

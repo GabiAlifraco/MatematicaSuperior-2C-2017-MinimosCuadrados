@@ -1,6 +1,7 @@
 package com.superior.model.dto;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import com.superior.calculo.NumberUtils;
@@ -31,7 +32,7 @@ public abstract class AproxBase implements Comparable<AproximacionOperaciones> {
 		return puntosGrafica;
 	}
 
-	public Double minimoErrorCometido() {
+	public Double minimoErrorCometido() throws Exception {
 		List<Double> errores = obtenerColumnaErrores();
 		Double sumatoria = 0D;
 		for (Double error : errores) {
@@ -40,10 +41,11 @@ public abstract class AproxBase implements Comparable<AproximacionOperaciones> {
 		return num.redondear(sumatoria, this.cantidadDecimales);
 	}
 
-	public List<Double> obtenerColumnaErrores() {
+	public List<Double> obtenerColumnaErrores() throws Exception {
 		List<Double> erores = new ArrayList<Double>();
 		for (AproxData punto : tablaValores.getDatos()) {
 			Double x = punto.x();
+
 			Double y = aplicarFuncion(x);
 
 			Double errorCometido = num.redondear(y - punto.y(), this.cantidadDecimales);
@@ -52,7 +54,7 @@ public abstract class AproxBase implements Comparable<AproximacionOperaciones> {
 		return erores;
 	}
 
-	public List<Double> obtenerColumnaFuncionAplicada() {
+	public List<Double> obtenerColumnaFuncionAplicada() throws Exception{
 		List<Double> valores = new ArrayList<Double>();
 		for (AproxData punto : tablaValores.getDatos()) {
 			Double x = punto.x();
@@ -62,26 +64,44 @@ public abstract class AproxBase implements Comparable<AproximacionOperaciones> {
 	}
 
 	public int compareTo(AproximacionOperaciones o) {
-		return this.minimoErrorCometido().compareTo(o.minimoErrorCometido());
+		try {
+			return this.minimoErrorCometido().compareTo(o.minimoErrorCometido());
+		} catch (Exception e) {
+			return 0;
+		}
 	}
 
-	public List<AproxData> obtenerPuntosFuncionAproximacionParaGraficar() {
+	public List<AproxData> obtenerPuntosFuncionAproximacionParaGraficar() throws Exception {
 		List<AproxData> puntosGrafica = new ArrayList<AproxData>();
-		for (AproxData punto : tablaValores.getDatos()) {
-			Double x = punto.x();
-			Double y = aplicarFuncion(x);
+		Collections.sort(tablaValores.getDatos());
+		AproxData puntoMinimo = tablaValores.getDatos().get(tablaValores.getDatos().size() - 1);
+		AproxData puntoMaximo = tablaValores.getDatos().get(0);
+
+		double incrementoX = 0;
+		incrementoX = Math.abs((puntoMinimo.x() - puntoMaximo.x())) / 200;
+
+		for (int i = 0; i < 200; i++) {
+			Double x = puntoMinimo.x() + i * incrementoX;
+			Double y = aplicarFuncion(puntoMinimo.x() + i * incrementoX);
 			AproxData puntoGrafica = new AproxData(x, y, cantidadDecimales);
 			puntosGrafica.add(puntoGrafica);
 		}
 		return puntosGrafica;
 	}
 
-	public Double aplicarFuncion(Double x) {
+	public Double aplicarFuncion(Double x) throws Exception {
 		if (A == null || B == null) {
-			calcularFuncionAproximacion();
+			try {
+				calcularFuncionAproximacion();
+
+			} catch (Exception e) {
+				throw new Exception("No es posible para los datos ingresados calcular una aproximación " + this.getNombre());
+			}
 		}
 		return num.redondear((A * x + B), cantidadDecimales);
 	}
 
 	public abstract void calcularFuncionAproximacion();
+
+	public abstract String getNombre();
 }

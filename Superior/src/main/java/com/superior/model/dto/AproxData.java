@@ -2,7 +2,7 @@ package com.superior.model.dto;
 
 import com.superior.calculo.NumberUtils;
 
-public class AproxData {
+public class AproxData implements Comparable<AproxData> {
 	private Double x;
 	private Double y;
 
@@ -28,11 +28,32 @@ public class AproxData {
 	}
 
 	public Double xCuadrado() {
-		return
-
-		num.redondear(Math.pow(x, 2), cantidadDecimales);
+		return num.redondear(Math.pow(x, 2), cantidadDecimales);
 	}
 
-	
+	public Double lnY() {
+		return num.redondear(Math.log(y), cantidadDecimales);
+	}
+
+	public Double lnX() {
+		return num.redondear(Math.log(x), cantidadDecimales);
+	}
+
+	public Double lnXCuadrado() {
+		return num.redondear(Math.pow(lnX(), 2), cantidadDecimales);
+	}
+
+	public Double XlnY() {
+		return num.redondear(x * lnY(), cantidadDecimales);
+	}
+
+	public Double lnXlnY() {
+		return num.redondear(lnX() * lnY(), cantidadDecimales);
+	}
+
+	public int compareTo(AproxData o) {
+
+		return  o.x.compareTo(this.x) ;
+	}
 
 }

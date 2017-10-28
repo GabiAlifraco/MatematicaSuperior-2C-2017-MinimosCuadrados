@@ -9,19 +9,19 @@ public interface AproximacionOperaciones extends Comparable<AproximacionOperacio
 
 	public String[] tablaCabecera();
 
-	public List<AproxData> obtenerPuntosFuncionAproximacionParaGraficar();
+	public List<AproxData> obtenerPuntosFuncionAproximacionParaGraficar() throws Exception;
 
 	public List<AproxData> obtenerPuntosCoordenadasOriginales();
 
-	public Double aplicarFuncion(Double x);
+	public Double aplicarFuncion(Double x) throws Exception;
 
-	public void calcularFuncionAproximacion();
+	public void calcularFuncionAproximacion() throws Exception;
 
-	public List<Double> obtenerColumnaErrores();
+	public List<Double> obtenerColumnaErrores() throws Exception;
 
-	public Double minimoErrorCometido();
+	public Double minimoErrorCometido() throws Exception;
 
-	public List<Double> obtenerColumnaFuncionAplicada();
+	public List<Double> obtenerColumnaFuncionAplicada() throws Exception;
 
 	public String getNombre();
 }

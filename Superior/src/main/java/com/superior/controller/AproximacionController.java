@@ -20,77 +20,98 @@ public class AproximacionController implements IAproximacionController {
 
 	public void visualizarAproximacion(String tipoAproximacion, AproxTable datos, Integer cantidadDecimales) {
 		AproximacionOperaciones aproximacion = AproxFactory.crearAproximacion(tipoAproximacion, datos, cantidadDecimales);
-		List<AproxData> puntosFuncion = aproximacion.obtenerPuntosFuncionAproximacionParaGraficar();
-		List<Double> x = new ArrayList<Double>();
-		List<Double> y = new ArrayList<Double>();
-		for (AproxData punto : puntosFuncion) {
-			x.add(punto.x());
-			y.add(punto.y());
+
+		try {
+
+			List<AproxData> puntosFuncion = aproximacion.obtenerPuntosFuncionAproximacionParaGraficar();
+			List<Double> x = new ArrayList<Double>();
+			List<Double> y = new ArrayList<Double>();
+			for (AproxData punto : puntosFuncion) {
+				x.add(punto.x());
+				y.add(punto.y());
+			}
+			new GraficoFuncionAproximacion(x, y, tipoAproximacion);
+		} catch (Exception e) {
+			JOptionPane.showMessageDialog(null, "No se puede calcular la aproximacion " + aproximacion.getNombre() + " con los datos ingresados");
 		}
-		new GraficoFuncionAproximacion(x, y, tipoAproximacion);
 	}
 
 	public void visualizarCalculos(String tipoAproximacion, AproxTable datos, Integer cantidadDecimales) {
 		AproximacionOperaciones aproximacion = AproxFactory.crearAproximacion(tipoAproximacion, datos, cantidadDecimales);
-		DefaultTableModel dtm = new DefaultTableModel(aproximacion.obtenerTablaCalculos(), aproximacion.tablaCabecera());
-		dtm.addRow(aproximacion.obtenerFilaSumarizadora());
-		new VistaCalculosForm(dtm);
+
+		try {
+			DefaultTableModel dtm = new DefaultTableModel(aproximacion.obtenerTablaCalculos(), aproximacion.tablaCabecera());
+			dtm.addRow(aproximacion.obtenerFilaSumarizadora());
+			new VistaCalculosForm(dtm);
+		} catch (Exception e) {
+			JOptionPane.showMessageDialog(null, "No se puede calcular la aproximacion " + aproximacion.getNombre() + " con los datos ingresados");
+		}
 	}
 
 	public void visualizarFuncionAproximadaConCoordenadas(String tipoAproximacion, AproxTable datos, Integer cantidadDecimales) {
 		AproximacionOperaciones aproximacion = AproxFactory.crearAproximacion(tipoAproximacion, datos, cantidadDecimales);
-		List<AproxData> puntosFuncion = aproximacion.obtenerPuntosFuncionAproximacionParaGraficar();
-		List<Double> x = new ArrayList<Double>();
-		List<Double> y = new ArrayList<Double>();
-		List<Double> yCoordenada = new ArrayList<Double>();
-		for (AproxData punto : puntosFuncion) {
-			x.add(punto.x());
-			y.add(punto.y());
+		try {
+			List<AproxData> puntosFuncion = aproximacion.obtenerPuntosFuncionAproximacionParaGraficar();
+			List<Double> x = new ArrayList<Double>();
+			List<Double> y = new ArrayList<Double>();
+			List<Double> yCoordenada = new ArrayList<Double>();
+			List<Double> xCoordenada = new ArrayList<Double>();
+			for (AproxData punto : puntosFuncion) {
+				x.add(punto.x());
+				y.add(punto.y());
+			}
+			for (AproxData punto : datos.getDatos()) {
+				yCoordenada.add(punto.y());
+				xCoordenada.add(punto.x());
+			}
+			new GraficoFuncionConCoordenadas(x, y, xCoordenada, yCoordenada);
+		} catch (Exception e) {
+			JOptionPane.showMessageDialog(null, "No se puede calcular la aproximacion " + aproximacion.getNombre() + " con los datos ingresados");
 		}
-		for (AproxData punto : datos.getDatos()) {
-			yCoordenada.add(punto.y());
-		}
-		new GraficoFuncionConCoordenadas(x, y, x, yCoordenada);
 	}
 
 	public void compararErrorFunciones(VerComparacionForm form) {
 		List<AproximacionOperaciones> aproximacionesElegidas = obtenerAproximacionesElegidas(form);
+
 		if (aproximacionesElegidas == null)
 			return;
+		try {
+			String[] cabecera = new String[3 + (2 * aproximacionesElegidas.size())];
+			cabecera[0] = "i";
+			cabecera[1] = "X";
+			cabecera[2] = "Y";
 
-		String[] cabecera = new String[3 + (2 * aproximacionesElegidas.size())];
-		cabecera[0] = "i";
-		cabecera[1] = "X";
-		cabecera[2] = "Y";
+			List<List<Double>> columnasErrores = new ArrayList<List<Double>>();
+			List<List<Double>> columnasValores = new ArrayList<List<Double>>();
+			int indiceCabecara = 3;
+			for (AproximacionOperaciones aproximacion : aproximacionesElegidas) {
 
-		List<List<Double>> columnasErrores = new ArrayList<List<Double>>();
-		List<List<Double>> columnasValores = new ArrayList<List<Double>>();
-		int indiceCabecara = 3;
-		for (AproximacionOperaciones aproximacion : aproximacionesElegidas) {
-			columnasValores.add(aproximacion.obtenerColumnaFuncionAplicada());
-			columnasErrores.add(aproximacion.obtenerColumnaErrores());
-			cabecera[indiceCabecara] = aproximacion.getNombre();
-			cabecera[indiceCabecara + aproximacionesElegidas.size()] = aproximacion.getNombre();
-			indiceCabecara++;
-		}
-		int cantidadFilas = form.getTV().getDatos().size();
-		String[][] tabla = new String[cantidadFilas][3 + (2 * aproximacionesElegidas.size())];
-		for (int i = 0; i < cantidadFilas; i++) {
-			tabla[i][0] = i + 1 + "";
-			tabla[i][1] = form.getTV().getDatos().get(i).x().toString();
-			tabla[i][2] = form.getTV().getDatos().get(i).y().toString();
-			for (int j = 0; j < columnasErrores.size(); j++) {
-
-				tabla[i][j + 3] = columnasValores.get(j).get(i).toString();
-				tabla[i][j + 3 + aproximacionesElegidas.size()] = columnasErrores.get(j).get(i).toString();
+				columnasValores.add(aproximacion.obtenerColumnaFuncionAplicada());
+				columnasErrores.add(aproximacion.obtenerColumnaErrores());
+				cabecera[indiceCabecara] = aproximacion.getNombre();
+				cabecera[indiceCabecara + aproximacionesElegidas.size()] = aproximacion.getNombre();
+				indiceCabecara++;
 			}
+			int cantidadFilas = form.getTV().getDatos().size();
+			String[][] tabla = new String[cantidadFilas][3 + (2 * aproximacionesElegidas.size())];
+			for (int i = 0; i < cantidadFilas; i++) {
+				tabla[i][0] = i + 1 + "";
+				tabla[i][1] = form.getTV().getDatos().get(i).x().toString();
+				tabla[i][2] = form.getTV().getDatos().get(i).y().toString();
+				for (int j = 0; j < columnasErrores.size(); j++) {
+
+					tabla[i][j + 3] = columnasValores.get(j).get(i).toString();
+					tabla[i][j + 3 + aproximacionesElegidas.size()] = columnasErrores.get(j).get(i).toString();
+				}
+			}
+			DefaultTableModel dtm = new DefaultTableModel(tabla, cabecera);
+			form.tablaCalculos().setModel(dtm);
+
+			Collections.sort(aproximacionesElegidas);
+			form.setearTexto("La mejor aproximaciòn es " + aproximacionesElegidas.get(0).getNombre() + ".Su error cuadratico es " + aproximacionesElegidas.get(0).minimoErrorCometido());
+		} catch (Exception e) {
+			JOptionPane.showMessageDialog(null, e.getMessage());
 		}
-		DefaultTableModel dtm = new DefaultTableModel(tabla, cabecera);
-		form.tablaCalculos().setModel(dtm);
-
-		Collections.sort(aproximacionesElegidas);
-		form.setearTexto("La mejor aproximaciòn es " + aproximacionesElegidas.get(0).getNombre() + ".Su error cuadratico es " + aproximacionesElegidas.get(0).minimoErrorCometido());
-
 	}
 
 	private List<AproximacionOperaciones> obtenerAproximacionesElegidas(VerComparacionForm form) {

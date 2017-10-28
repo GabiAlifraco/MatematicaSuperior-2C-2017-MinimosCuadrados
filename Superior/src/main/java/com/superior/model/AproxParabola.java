@@ -11,17 +11,17 @@ public class AproxParabola extends AproxBase implements AproximacionOperaciones 
 	}
 
 	public String[][] obtenerTablaCalculos() {
-		// TODO Auto-generated method stub
+		
 		return null;
 	}
 
 	public String[] obtenerFilaSumarizadora() {
-		// TODO Auto-generated method stub
+		
 		return null;
 	}
 
 	public String[] tablaCabecera() {
-		// TODO Auto-generated method stub
+		
 		return null;
 	}
 
@@ -31,8 +31,7 @@ public class AproxParabola extends AproxBase implements AproximacionOperaciones 
 
 	@Override
 	public void calcularFuncionAproximacion() {
-		// TODO Auto-generated method stub
-
+	
 	}
 
 }

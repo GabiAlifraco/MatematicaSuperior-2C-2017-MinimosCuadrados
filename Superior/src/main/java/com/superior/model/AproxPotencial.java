@@ -47,7 +47,7 @@ public class AproxPotencial extends AproxBase implements AproximacionOperaciones
 		ecuacion.calcular(tablaValores.sumatorialnXCuadrado(), tablaValores.sumatorialnX(), tablaValores.sumatorialnXlnY(), tablaValores.sumatorialnX(), tablaValores.sumatoria1(), tablaValores.sumatorialnY(),cantidadDecimales);
 		A = ecuacion.X();
 		B = num.redondear(Math.exp(ecuacion.Y()), cantidadDecimales);
-		this.detalleCalculo = ecuacion.detalleCalculo();
+		detalleCalculadoConFuncionObtenida(ecuacion);
 	}
 
 	@Override
@@ -55,5 +55,18 @@ public class AproxPotencial extends AproxBase implements AproximacionOperaciones
 
 		return A * Math.pow(valorX, B);
 	}
+	
+	public void detalleCalculadoConFuncionObtenida(EcuacionDosIncognitasUtils ecuacion){
+		
+		String detalle = ecuacion.detalleCalculo();
+		detalle += "\n --------------------------------------------------- ";
+		detalle += "\n La Funcion Potencial de minimos cuadrados es F(X) = "+ B +" X ^ " + A  ;
+		
+		this.detalleCalculo=detalle;
+		
+	}
+	
+	
+	
 
 }

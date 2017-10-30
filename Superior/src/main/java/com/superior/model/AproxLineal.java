@@ -17,7 +17,7 @@ public class AproxLineal extends AproxBase implements AproximacionOperaciones {
 		ecuacion.calcular(tablaValores.sumatoriaXCuadrado(), tablaValores.sumatoriaX(), tablaValores.sumatoriaXY(), tablaValores.sumatoriaX(), tablaValores.sumatoria1(), tablaValores.sumatoriaY(),cantidadDecimales);
 		A = ecuacion.X();
 		B = ecuacion.Y();
-		this.detalleCalculo = ecuacion.detalleCalculo();
+		detalleCalculadoConFuncionObtenida(ecuacion);
 	}
 
 	public String[][] obtenerTablaCalculos() {
@@ -50,5 +50,19 @@ public class AproxLineal extends AproxBase implements AproximacionOperaciones {
 	
 		return A *valorX + B ;
 	}
+	
+	public void detalleCalculadoConFuncionObtenida(EcuacionDosIncognitasUtils ecuacion){
+		
+		String detalle = ecuacion.detalleCalculo();
+		detalle += "\n --------------------------------------------------- ";
+		detalle += "\n La Recta de minimos cuadrados es P(X) = "+ A +" X + "+ B;
+		
+		this.detalleCalculo=detalle;
+		
+	}
+	
+	
+	
+	
 
 }

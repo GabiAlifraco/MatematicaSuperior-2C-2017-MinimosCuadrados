@@ -47,13 +47,29 @@ public class AproxExponencial extends AproxBase implements AproximacionOperacion
 		ecuacion.calcular(tablaValores.sumatoriaXCuadrado(), tablaValores.sumatoriaX(), tablaValores.sumatoriaXlnY(), tablaValores.sumatoriaX(), tablaValores.sumatoria1(), tablaValores.sumatorialnY(),cantidadDecimales);
 		A = num.redondear(ecuacion.X(), cantidadDecimales);
 		B = num.redondear(Math.exp(ecuacion.Y()), cantidadDecimales);
-		this.detalleCalculo = ecuacion.detalleCalculo();
+		detalleCalculadoConFuncionObtenida(ecuacion);
 	}
-
 	@Override
 	protected Double funcion(double valorX) {
 
 		return B * Math.pow(Math.E, A * valorX);
 	}
+	
+	public void detalleCalculadoConFuncionObtenida(EcuacionDosIncognitasUtils ecuacion){
+		
+		String detalle = ecuacion.detalleCalculo();
+		detalle += "\n --------------------------------------------------- ";
+		detalle += "\n La Funcion Exponencial de minimos cuadrados es E(X) = "+ B +" e ^ " + A+"X"  ;
+		
+		this.detalleCalculo=detalle;
+		
+	}
+	
+	
+	
+	
+	
+	
+	
 
 }

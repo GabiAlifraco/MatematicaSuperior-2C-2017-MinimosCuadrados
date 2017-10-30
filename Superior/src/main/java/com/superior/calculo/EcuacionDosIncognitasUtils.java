@@ -31,16 +31,21 @@ public class EcuacionDosIncognitasUtils {
 	}
 
 	private void generarDetalleCalculo(Double a, Double b, Double c, Double d, Double e, Double f, Double x, Double y) {
-		detalle += "\n Detalle del Cálculo";
+		detalle += "\n Sistema de Ecuaciones utilizado :";
+		detalle += "\n --------------------------------------------";
 		detalle += "\n" + a.toString() + " . X + " + b.toString() + " . Y = " + c.toString();
 		detalle += "\n" + d.toString() + " . X + " + e.toString() + " . Y = " + f.toString();
 
 		detalle += "\n";
+		detalle += "\n Detalle del Cï¿½lculo :";
+		detalle += "\n ---------------------------";
 		detalle += "\n y = ((" + f.toString() + "*" + a.toString() + ") - (" + d.toString() + "* " + c.toString() + ")) / ((" + e.toString() + " * " + a.toString() + ") - (" + d.toString() + " * " + b.toString() + "))";
 		detalle += "\n y = " + y;
 		detalle += "\n x = (" + c + " - (" + b + "* y)) / " + a;
 		detalle += "\n x = (" + c + " - (" + b + "* " + y + ")) / " + a;
 		detalle += "\n x = " + x;
+		detalle += "\n  ";
+		detalle += "\n Funcion hallada para la aproximacion: ";
 	}
 
 }

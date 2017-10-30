@@ -63,6 +63,14 @@ public class AproxData implements Comparable<AproxData> {
 		return num.redondear(y * xCuadrado(), cantidadDecimales);
 	}
 	
+	public Double inversaY() {
+		return num.redondear(Math.pow(y, -1), cantidadDecimales);
+	}
+	
+	public Double XinversaY() {
+		return num.redondear(x * inversaY(), cantidadDecimales);
+	}
+	
 	public int compareTo(AproxData o) {
 
 		return  o.x.compareTo(this.x) ;

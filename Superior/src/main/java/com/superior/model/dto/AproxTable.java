@@ -124,5 +124,20 @@ public class AproxTable {
 		return sumatoria;
 	}
 	
+	public Double sumatoriaInversaY() {
+		Double sumatoria = 0D;
+		for (AproxData dato : datos) {
+			sumatoria += num.redondear(dato.inversaY(), cantidadDecimales);
+		}
+		return sumatoria;
+	}
+	
+	public Double sumatoriaXInversaY() {
+		Double sumatoria = 0D;
+		for (AproxData dato : datos) {
+			sumatoria += num.redondear(dato.XinversaY(), cantidadDecimales);
+		}
+		return sumatoria;
+	}
 	
 }

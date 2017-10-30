@@ -3,7 +3,6 @@ package com.superior.model;
 import com.superior.model.dto.AproxBase;
 import com.superior.model.dto.AproxTable;
 import com.superior.model.dto.AproximacionOperaciones;
-import com.superior.calculo.EcuacionDosIncognitasUtils;
 import com.superior.calculo.EcuacionTresIncognitasUtils;
 import com.superior.model.dto.AproxData;
 

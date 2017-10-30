@@ -99,4 +99,30 @@ public class AproxTable {
 		}
 		return sumatoria;
 	}
+	
+	public Double sumatoriaXCubo() {
+		Double sumatoria = 0D;
+		for (AproxData dato : datos) {
+			sumatoria += num.redondear(dato.xCubo(), cantidadDecimales);
+		}
+		return sumatoria;
+	}
+	
+	public Double sumatoriaXCuarta() {
+		Double sumatoria = 0D;
+		for (AproxData dato : datos) {
+			sumatoria += num.redondear(dato.xCuarta(), cantidadDecimales);
+		}
+		return sumatoria;
+	}
+	
+	public Double sumatoriaYXCuadrado() {
+		Double sumatoria = 0D;
+		for (AproxData dato : datos) {
+			sumatoria += num.redondear(dato.yxCuadrado(), cantidadDecimales);
+		}
+		return sumatoria;
+	}
+	
+	
 }

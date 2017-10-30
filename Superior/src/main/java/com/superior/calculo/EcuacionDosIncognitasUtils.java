@@ -37,7 +37,7 @@ public class EcuacionDosIncognitasUtils {
 		detalle += "\n" + d.toString() + " . X + " + e.toString() + " . Y = " + f.toString();
 
 		detalle += "\n";
-		detalle += "\n Detalle del Cï¿½lculo :";
+		detalle += "\n Detalle del Cálculo :";
 		detalle += "\n ---------------------------";
 		detalle += "\n y = ((" + f.toString() + "*" + a.toString() + ") - (" + d.toString() + "* " + c.toString() + ")) / ((" + e.toString() + " * " + a.toString() + ") - (" + d.toString() + " * " + b.toString() + "))";
 		detalle += "\n y = " + y;

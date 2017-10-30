@@ -1,5 +1,7 @@
 package com.superior.model.dto;
 
+import javax.swing.JOptionPane;
+
 import com.superior.model.AproxExponencial;
 import com.superior.model.AproxHiperbola;
 import com.superior.model.AproxLineal;
@@ -19,6 +21,7 @@ public class AproxFactory {
 		} else if (tipoAproximacion.equalsIgnoreCase("HIPERBOLA")) {
 			return new AproxHiperbola(tablaValores,cantidadDecimales);
 		}
+		JOptionPane.showMessageDialog(null, "Seleccione algun tipo de aproximación");
 		return null;
 	}
 }

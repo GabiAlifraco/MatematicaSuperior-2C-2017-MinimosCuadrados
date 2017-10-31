@@ -10,6 +10,11 @@ import com.superior.model.AproxPotencial;
 
 public class AproxFactory {
 	public static AproximacionOperaciones crearAproximacion(String tipoAproximacion, AproxTable tablaValores, Integer cantidadDecimales) {
+		
+		if(tipoAproximacion==null){
+			JOptionPane.showMessageDialog(null, "Seleccione algun tipo de aproximaciï¿½n");	
+			return null;
+		}
 		if (tipoAproximacion.equalsIgnoreCase("LINEAL")) {
 			return new AproxLineal(tablaValores,cantidadDecimales);
 		} else if (tipoAproximacion.equalsIgnoreCase("PARABOLA")) {
@@ -20,8 +25,8 @@ public class AproxFactory {
 			return new AproxPotencial(tablaValores,cantidadDecimales);
 		} else if (tipoAproximacion.equalsIgnoreCase("HIPERBOLA")) {
 			return new AproxHiperbola(tablaValores,cantidadDecimales);
-		}
-		JOptionPane.showMessageDialog(null, "Seleccione algun tipo de aproximación");
+			}
+		JOptionPane.showMessageDialog(null, "Seleccione algun tipo de aproximaciï¿½n");
 		return null;
 	}
 }

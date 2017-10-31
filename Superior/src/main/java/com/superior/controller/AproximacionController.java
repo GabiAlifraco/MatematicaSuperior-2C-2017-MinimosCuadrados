@@ -32,7 +32,9 @@ public class AproximacionController implements IAproximacionController {
 			}
 			new GraficoFuncionAproximacion(x, y, tipoAproximacion);
 		} catch (Exception e) {
+			if(aproximacion!=null){
 			JOptionPane.showMessageDialog(null, "No se puede calcular la aproximacion " + aproximacion.getNombre() + " con los datos ingresados");
+			}
 		}
 	}
 
@@ -44,7 +46,9 @@ public class AproximacionController implements IAproximacionController {
 			dtm.addRow(aproximacion.obtenerFilaSumarizadora());
 			new VistaCalculosForm(dtm,aproximacion.detalleCalculo());
 		} catch (Exception e) {
-			JOptionPane.showMessageDialog(null, "No se puede calcular la aproximacion " + aproximacion.getNombre() + " con los datos ingresados");
+			if(aproximacion!=null){
+				JOptionPane.showMessageDialog(null, "No se puede calcular la aproximacion " + aproximacion.getNombre() + " con los datos ingresados");
+				}
 		}
 	}
 
@@ -66,7 +70,9 @@ public class AproximacionController implements IAproximacionController {
 			}
 			new GraficoFuncionConCoordenadas(x, y, xCoordenada, yCoordenada);
 		} catch (Exception e) {
-			JOptionPane.showMessageDialog(null, "No se puede calcular la aproximacion " + aproximacion.getNombre() + " con los datos ingresados");
+			if(aproximacion!=null){
+				JOptionPane.showMessageDialog(null, "No se puede calcular la aproximacion " + aproximacion.getNombre() + " con los datos ingresados");
+				}
 		}
 	}
 
@@ -108,7 +114,7 @@ public class AproximacionController implements IAproximacionController {
 			form.tablaCalculos().setModel(dtm);
 
 			Collections.sort(aproximacionesElegidas);
-			form.setearTexto("La mejor aproximaciòn es " + aproximacionesElegidas.get(0).getNombre() + ".Su error cuadratico es " + aproximacionesElegidas.get(0).minimoErrorCometido());
+			form.setearTexto("La mejor aproximaciï¿½n es " + aproximacionesElegidas.get(0).getNombre() + ".Su error cuadratico es " + aproximacionesElegidas.get(0).minimoErrorCometido());
 		} catch (Exception e) {
 			JOptionPane.showMessageDialog(null, e.getMessage());
 		}

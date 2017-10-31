@@ -80,7 +80,7 @@ public class AproxParabola extends AproxBase implements AproximacionOperaciones 
 			
 			String detalle = ecuacion.detalleCalculo();
 			detalle += "\n --------------------------------------------------- ";
-			detalle += "\n La Parabola de minimos cuadrados es P(X) = "+ A +" X^2 + "+ B + " X + "+ C;
+			detalle += "\n La Parabola de minimos cuadrados es P(X) = "+ A +" X^2 "+ obtenerAoBParaDetalle(B) + " X "+ obtenerAoBParaDetalle(C);
 			detalle += "\n";
 			
 			this.detalleCalculo=detalle;

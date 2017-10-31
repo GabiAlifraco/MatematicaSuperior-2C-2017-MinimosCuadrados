@@ -55,7 +55,7 @@ public class AproxLineal extends AproxBase implements AproximacionOperaciones {
 		
 		String detalle = ecuacion.detalleCalculo();
 		detalle += "\n --------------------------------------------------- ";
-		detalle += "\n La Recta de minimos cuadrados es P(X) = "+ A +" X + "+ B;
+		detalle += "\n La Recta de minimos cuadrados es P(X) = "+ A +" X  "+ obtenerAoBParaDetalle(B);
 		
 		this.detalleCalculo=detalle;
 		

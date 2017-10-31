@@ -59,7 +59,7 @@ public class AproxExponencial extends AproxBase implements AproximacionOperacion
 		
 		String detalle = ecuacion.detalleCalculo();
 		detalle += "\n --------------------------------------------------- ";
-		detalle += "\n La Funcion Exponencial de minimos cuadrados es E(X) = "+ B +" e ^ " + A+"X"  ;
+		detalle += "\n La Funcion Exponencial de minimos cuadrados es E(X) = "+ B +" e ^ " + A+" X"  ;
 		
 		this.detalleCalculo=detalle;
 		

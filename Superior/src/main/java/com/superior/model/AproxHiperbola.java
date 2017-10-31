@@ -69,7 +69,7 @@ public void detalleCalculadoConFuncionObtenida(EcuacionDosIncognitasUtils ecuaci
 		
 		String detalle = ecuacion.detalleCalculo();
 		detalle += "\n --------------------------------------------------- ";
-		detalle += "\n La Hiperbola de minimos cuadrados es P(X) = "+ A +" /( + "+ B + " +X) ";
+		detalle += "\n La Hiperbola de minimos cuadrados es H(X) = "+ A +" /( "+obtenerAoBParaDetalle(B) + " + X) ";
 		
 		this.detalleCalculo=detalle;
 		

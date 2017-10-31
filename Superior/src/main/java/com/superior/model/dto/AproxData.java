@@ -73,7 +73,7 @@ public class AproxData implements Comparable<AproxData> {
 	
 	public int compareTo(AproxData o) {
 
-		return  o.x.compareTo(this.x) ;
+		return  this.x.compareTo(o.x) ;
 	}
 
 }

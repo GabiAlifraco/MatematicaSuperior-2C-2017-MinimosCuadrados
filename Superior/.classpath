@@ -11,7 +11,7 @@
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="var" path="M2_REPO/org/jfree/jfreechart/1.0.19/jfreechart-1.0.19.jar"/>
+	<classpathentry kind="var" path="M2_REPO/org/jfree/jfreechart/1.0.19/jfreechart-1.0.19.jar" sourcepath="C:/Users/Jonathan/.m2/repository/org/jfree/jfreechart/1.0.19/jfreechart-1.0.19-sources.jar"/>
 	<classpathentry kind="var" path="M2_REPO/org/jfree/jcommon/1.0.23/jcommon-1.0.23.jar"/>
 	<classpathentry kind="var" path="M2_REPO/net/java/dev/swing-layout/swing-layout/1.0.2/swing-layout-1.0.2.jar"/>
 	<classpathentry kind="src" output="target/test-classes" path="src/test/java">

@@ -45,7 +45,7 @@ public class GraficoFuncionAproximacion extends javax.swing.JFrame {
 		this.x = x;
 		this.y = y;
 		this.tipoFuncion = tipoFuncion;
-		setTitle("EMPRESA");
+		setTitle("AMIC");
 		setAutoRequestFocus(false);
 		setBounds(100, 100, 544, 360);
 		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);

@@ -32,8 +32,8 @@ public class AproximacionController implements IAproximacionController {
 			}
 			new GraficoFuncionAproximacion(x, y, tipoAproximacion);
 		} catch (Exception e) {
-			if(aproximacion!=null){
-			JOptionPane.showMessageDialog(null, "No se puede calcular la aproximacion " + aproximacion.getNombre() + " con los datos ingresados");
+			if (aproximacion != null) {
+				JOptionPane.showMessageDialog(null, "No se puede calcular la aproximacion " + aproximacion.getNombre() + " con los datos ingresados");
 			}
 		}
 	}
@@ -44,11 +44,11 @@ public class AproximacionController implements IAproximacionController {
 		try {
 			DefaultTableModel dtm = new DefaultTableModel(aproximacion.obtenerTablaCalculos(), aproximacion.tablaCabecera());
 			dtm.addRow(aproximacion.obtenerFilaSumarizadora());
-			new VistaCalculosForm(dtm,aproximacion.detalleCalculo());
+			new VistaCalculosForm(dtm, aproximacion.detalleCalculo());
 		} catch (Exception e) {
-			if(aproximacion!=null){
+			if (aproximacion != null) {
 				JOptionPane.showMessageDialog(null, "No se puede calcular la aproximacion " + aproximacion.getNombre() + " con los datos ingresados");
-				}
+			}
 		}
 	}
 
@@ -60,6 +60,8 @@ public class AproximacionController implements IAproximacionController {
 			List<Double> y = new ArrayList<Double>();
 			List<Double> yCoordenada = new ArrayList<Double>();
 			List<Double> xCoordenada = new ArrayList<Double>();
+			double xminimo = 0, yminimo = 0;
+			double xmaximo = 0, ymaximo = 0;
 			for (AproxData punto : puntosFuncion) {
 				x.add(punto.x());
 				y.add(punto.y());
@@ -67,13 +69,48 @@ public class AproximacionController implements IAproximacionController {
 			for (AproxData punto : datos.getDatos()) {
 				yCoordenada.add(punto.y());
 				xCoordenada.add(punto.x());
-			}
-			new GraficoFuncionConCoordenadas(x, y, xCoordenada, yCoordenada);
-		} catch (Exception e) {
-			if(aproximacion!=null){
-				JOptionPane.showMessageDialog(null, "No se puede calcular la aproximacion " + aproximacion.getNombre() + " con los datos ingresados");
+
+				if (xminimo > punto.x()) {
+					xminimo = punto.x();
 				}
+
+				if (xmaximo < punto.x()) {
+					xmaximo = punto.x();
+				}
+
+				if (yminimo > punto.y()) {
+					yminimo = punto.y();
+				}
+
+				if (ymaximo < punto.y()) {
+					ymaximo = punto.y();
+				}
+			}
+			double divisionX = division(xminimo, xmaximo);
+			double divisionY = division(yminimo, ymaximo);
+			new GraficoFuncionConCoordenadas(x, y, xCoordenada, yCoordenada, divisionX, divisionY,xminimo,xmaximo,yminimo,ymaximo);
+		} catch (Exception e) {
+			if (aproximacion != null) {
+				JOptionPane.showMessageDialog(null, "No se puede calcular la aproximacion " + aproximacion.getNombre() + " con los datos ingresados");
+			}
 		}
+	}
+
+	private Double division(double minimo, double maximo) {
+		double diferencia = Math.abs(minimo - maximo);
+		if (diferencia < 1) {
+			return 0.1;
+		}
+		if (diferencia < 10) {
+			return 0.5;
+		}
+		if (diferencia < 20) {
+			return 1.0;
+		}
+		if (diferencia < 200) {
+			return 10.0;
+		}
+		return diferencia / 20;
 	}
 
 	public void compararErrorFunciones(VerComparacionForm form) {

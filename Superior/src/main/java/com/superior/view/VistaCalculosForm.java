@@ -2,12 +2,15 @@ package com.superior.view;
 
 import javax.swing.JFrame;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableCellEditor;
 
 public class VistaCalculosForm extends javax.swing.JFrame {
 
+	@SuppressWarnings("deprecation")
 	public VistaCalculosForm(DefaultTableModel valores,String detalleCalculo) {
 		initComponents();
 		this.tablaCalculos.setModel(valores);
+		this.tablaCalculos.enable(true);
 		setTitle("CALCULOS");
 		setAutoRequestFocus(false);
 		setBounds(100, 100, 544, 360);

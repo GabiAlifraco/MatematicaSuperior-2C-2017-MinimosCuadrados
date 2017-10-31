@@ -34,6 +34,8 @@ public class GraficoFuncionConCoordenadas extends javax.swing.JFrame {
 	List<Double> xCoordenada;
 	List<Double> yCoordenada;
 
+	private Double divisionX, divisionY;
+	private Double xminimo, xmaximo, yminimo, ymaximo;
 	private static Color COLOR_SERIE_1 = new Color(255, 128, 64);
 
 	private static Color COLOR_SERIE_2 = new Color(28, 84, 140);
@@ -44,14 +46,15 @@ public class GraficoFuncionConCoordenadas extends javax.swing.JFrame {
 
 	// http://foro.chuidiang.org/otras-herramientas-y-librerias/insertar-2-funciones-en-una-misma-grafica-con-jfreechart/
 	// constructor
-	public GraficoFuncionConCoordenadas(List<Double> xFuncionAprox, List<Double> yFuncionAprox, List<Double> xCoordenada, List<Double> yCoordenada) {
+	public GraficoFuncionConCoordenadas(List<Double> xFuncionAprox, List<Double> yFuncionAprox, List<Double> xCoordenada, List<Double> yCoordenada, double divisionX, double divisionY, double xminimo, double xmaximo, double yminimo, double ymaximo) {
 		super("GRAFICO COMPARATIVO");
 		this.x = xFuncionAprox;
 		this.y = yFuncionAprox;
 		this.xCoordenada = xCoordenada;
 		this.yCoordenada = yCoordenada;
-
-		setTitle("EMPRESA");
+		this.divisionX = divisionX;
+		this.divisionY = divisionY;
+		setTitle("AMIC");
 		setAutoRequestFocus(false);
 		setBounds(100, 100, 544, 360);
 		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
@@ -59,6 +62,11 @@ public class GraficoFuncionConCoordenadas extends javax.swing.JFrame {
 		setSize(600, 570);
 		setLocationRelativeTo(null);
 		setVisible(true);
+
+		this.xminimo = xminimo;
+		this.xmaximo = xmaximo;
+		this.yminimo = yminimo;
+		this.ymaximo = ymaximo;
 	}
 
 	public BufferedImage creaImagen() {
@@ -68,6 +76,19 @@ public class GraficoFuncionConCoordenadas extends javax.swing.JFrame {
 			serie1.add(x.get(i), y.get(i));
 		}
 
+		final XYSeries ejex = new XYSeries("Eje X");
+
+		ejex.add(xminimo, new Double(0));
+		ejex.add(new Double(0), new Double(0));
+		ejex.add(xmaximo, new Double(0));
+
+		final XYSeries ejey = new XYSeries("Eje Y");
+		// for (int i = 0; i < y.size(); i++) {
+		ejey.add(new Double(0), yminimo);
+		ejey.add(new Double(0), new Double(0));
+		ejey.add(new Double(0), ymaximo);
+		// }
+
 		final XYSeries serie2 = new XYSeries("Puntos Ingresados");
 		for (int i = 0; i < xCoordenada.size(); i++) {
 			serie2.add(xCoordenada.get(i), yCoordenada.get(i));
@@ -76,6 +97,8 @@ public class GraficoFuncionConCoordenadas extends javax.swing.JFrame {
 		final XYSeriesCollection collection = new XYSeriesCollection();
 		collection.addSeries(serie1);
 		collection.addSeries(serie2);
+		collection.addSeries(ejex);
+		collection.addSeries(ejey);
 
 		// XYDataset juegoDatos = new XYSeriesCollection(collection);
 
@@ -97,9 +120,8 @@ public class GraficoFuncionConCoordenadas extends javax.swing.JFrame {
 
 	public JFreeChart crearGrafica(XYSeriesCollection dataset) {
 
-		final JFreeChart chart = ChartFactory.createXYLineChart("", "Eje X", "Eje Y", dataset, PlotOrientation.VERTICAL, true, true, false);
-	
-		
+		final JFreeChart chart = ChartFactory.createXYLineChart("", "", "", dataset, PlotOrientation.VERTICAL, true, true, false);
+
 		// color de fondo de la gráfica
 		chart.setBackgroundPaint(COLOR_FONDO_GRAFICA);
 
@@ -107,11 +129,11 @@ public class GraficoFuncionConCoordenadas extends javax.swing.JFrame {
 		configurarPlot(plot);
 
 		final NumberAxis domainAxis = (NumberAxis) plot.getDomainAxis();
-		configurarDomainAxis(domainAxis);
+		configurarDomainAxis(domainAxis, divisionX);
 
 		final NumberAxis rangeAxis = (NumberAxis) plot.getRangeAxis();
-		configurarRangeAxis(rangeAxis);
-//
+		configurarRangeAxis(rangeAxis, divisionY);
+		//
 		final XYLineAndShapeRenderer renderer = (XYLineAndShapeRenderer) plot.getRenderer();
 		configurarRendered(renderer);
 
@@ -127,26 +149,33 @@ public class GraficoFuncionConCoordenadas extends javax.swing.JFrame {
 
 	// configuramos el eje X de la gráfica (se muestran números enteros y de uno
 	// en uno)
-	private void configurarDomainAxis(NumberAxis domainAxis) {
+	private void configurarDomainAxis(NumberAxis domainAxis, double division) {
 		domainAxis.setStandardTickUnits(NumberAxis.createIntegerTickUnits());
-		domainAxis.setTickUnit(new NumberTickUnit(1));
+		domainAxis.setTickUnit(new NumberTickUnit(division));
 	}
 
 	// configuramos el eje y de la gráfica (números enteros de dos en dos y
 	// rango entre 120 y 135)
-	private void configurarRangeAxis(NumberAxis rangeAxis) {
+	private void configurarRangeAxis(NumberAxis rangeAxis, double division) {
 		rangeAxis.setStandardTickUnits(NumberAxis.createIntegerTickUnits());
-		rangeAxis.setTickUnit(new NumberTickUnit(1));
-//		rangeAxis.setRange(120, 135);
+		rangeAxis.setTickUnit(new NumberTickUnit(division));
+		// rangeAxis.setRange(120, 135);
 	}
 
 	// configuramos las líneas de las series (añadimos un círculo en los puntos
 	// y asignamos el color de cada serie)
 	private void configurarRendered(XYLineAndShapeRenderer renderer) {
-		renderer.setSeriesShapesVisible(0, true);
+		renderer.setSeriesShapesVisible(0, false);
 		renderer.setSeriesShapesVisible(1, true);
+		renderer.setSeriesShapesVisible(2, false);
+		renderer.setSeriesShapesVisible(3, false);
 		renderer.setSeriesLinesVisible(1, false);
 		renderer.setSeriesPaint(0, COLOR_SERIE_1);
 		renderer.setSeriesPaint(1, COLOR_SERIE_2);
+
+		renderer.setSeriesShapesVisible(2, false);
+		renderer.setSeriesShapesVisible(3, false);
+		renderer.setSeriesPaint(2, Color.BLACK);
+		renderer.setSeriesPaint(3, Color.BLACK);
 	}
 }

@@ -75,8 +75,8 @@ public abstract class AproxBase implements Comparable<AproximacionOperaciones> {
 	public List<AproxData> obtenerPuntosFuncionAproximacionParaGraficar() throws Exception {
 		List<AproxData> puntosGrafica = new ArrayList<AproxData>();
 		Collections.sort(tablaValores.getDatos());
-		AproxData puntoMinimo = tablaValores.getDatos().get(tablaValores.getDatos().size() - 1);
-		AproxData puntoMaximo = tablaValores.getDatos().get(0);
+		AproxData puntoMinimo = tablaValores.getDatos().get(0);
+		AproxData puntoMaximo = tablaValores.getDatos().get(tablaValores.getDatos().size() - 1);
 
 		double incrementoX = 0;
 		incrementoX = Math.abs((puntoMinimo.x() - puntoMaximo.x())) / 200;

@@ -198,6 +198,11 @@ public class IngresoNumerosForm extends javax.swing.JFrame {
 			JOptionPane.showMessageDialog(this, "Error. Debe ingresar al menos una coordenada");
 			return;
 		}
+		
+		if(this.datosListaCoordenadas.getSize()<2){
+			JOptionPane.showMessageDialog(this, "Error. Debe ingresar al menos dos puntos.");
+			return;
+		}
 
 		AproxTable tablaDatos = new AproxTable(numero);
 		for (int i = 0; i < this.datosListaCoordenadas.getSize(); i++) {

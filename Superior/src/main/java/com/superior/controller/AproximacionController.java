@@ -11,7 +11,6 @@ import com.superior.model.dto.AproxData;
 import com.superior.model.dto.AproxFactory;
 import com.superior.model.dto.AproxTable;
 import com.superior.model.dto.AproximacionOperaciones;
-import com.superior.view.GraficoFuncionAproximacion;
 import com.superior.view.GraficoFuncionConCoordenadas;
 import com.superior.view.VerComparacionForm;
 import com.superior.view.VistaCalculosForm;
@@ -20,17 +19,37 @@ public class AproximacionController implements IAproximacionController {
 
 	public void visualizarAproximacion(String tipoAproximacion, AproxTable datos, Integer cantidadDecimales) {
 		AproximacionOperaciones aproximacion = AproxFactory.crearAproximacion(tipoAproximacion, datos, cantidadDecimales);
-
 		try {
-
 			List<AproxData> puntosFuncion = aproximacion.obtenerPuntosFuncionAproximacionParaGraficar();
 			List<Double> x = new ArrayList<Double>();
 			List<Double> y = new ArrayList<Double>();
+
+			double xminimo = 0, yminimo = 0;
+			double xmaximo = 0, ymaximo = 0;
 			for (AproxData punto : puntosFuncion) {
 				x.add(punto.x());
 				y.add(punto.y());
+
+				if (xminimo > punto.x()) {
+					xminimo = punto.x();
+				}
+
+				if (xmaximo < punto.x()) {
+					xmaximo = punto.x();
+				}
+
+				if (yminimo > punto.y()) {
+					yminimo = punto.y();
+				}
+
+				if (ymaximo < punto.y()) {
+					ymaximo = punto.y();
+				}
 			}
-			new GraficoFuncionAproximacion(x, y, tipoAproximacion);
+
+			double divisionX = division(xminimo, xmaximo);
+			double divisionY = division(yminimo, ymaximo);
+			new GraficoFuncionConCoordenadas(x, y, null, null, divisionX, divisionY, xminimo, xmaximo, yminimo, ymaximo, false);
 		} catch (Exception e) {
 			if (aproximacion != null) {
 				JOptionPane.showMessageDialog(null, "No se puede calcular la aproximacion " + aproximacion.getNombre() + " con los datos ingresados");
@@ -60,15 +79,14 @@ public class AproximacionController implements IAproximacionController {
 			List<Double> y = new ArrayList<Double>();
 			List<Double> yCoordenada = new ArrayList<Double>();
 			List<Double> xCoordenada = new ArrayList<Double>();
+			double xCoorminimo = 0, yCoorminimo = 0;
+			double xCoormaximo = 0, yCoormaximo = 0;
+
 			double xminimo = 0, yminimo = 0;
 			double xmaximo = 0, ymaximo = 0;
 			for (AproxData punto : puntosFuncion) {
 				x.add(punto.x());
 				y.add(punto.y());
-			}
-			for (AproxData punto : datos.getDatos()) {
-				yCoordenada.add(punto.y());
-				xCoordenada.add(punto.x());
 
 				if (xminimo > punto.x()) {
 					xminimo = punto.x();
@@ -86,9 +104,35 @@ public class AproximacionController implements IAproximacionController {
 					ymaximo = punto.y();
 				}
 			}
-			double divisionX = division(xminimo, xmaximo);
-			double divisionY = division(yminimo, ymaximo);
-			new GraficoFuncionConCoordenadas(x, y, xCoordenada, yCoordenada, divisionX, divisionY,xminimo,xmaximo,yminimo,ymaximo);
+			for (AproxData punto : datos.getDatos()) {
+				yCoordenada.add(punto.y());
+				xCoordenada.add(punto.x());
+
+				if (xCoorminimo > punto.x()) {
+					xCoorminimo = punto.x();
+				}
+
+				if (xCoormaximo < punto.x()) {
+					xCoormaximo = punto.x();
+				}
+
+				if (yCoorminimo > punto.y()) {
+					yCoorminimo = punto.y();
+				}
+
+				if (yCoormaximo < punto.y()) {
+					yCoormaximo = punto.y();
+				}
+			}
+
+			double xMinimoReal = xminimo < xCoorminimo ? xminimo : xCoorminimo;
+			double xMaximoReal = xmaximo > xCoormaximo ? xmaximo : xCoormaximo;
+			double yMinimoReal = yminimo < yCoorminimo ? yminimo : yCoorminimo;
+			double yMaximoReal = ymaximo > yCoormaximo ? ymaximo : yCoormaximo;
+
+			double divisionX = division(xMinimoReal, xMaximoReal);
+			double divisionY = division(yMinimoReal, yMaximoReal);
+			new GraficoFuncionConCoordenadas(x, y, xCoordenada, yCoordenada, divisionX, divisionY, xCoorminimo, xCoormaximo, yCoorminimo, yCoormaximo, true);
 		} catch (Exception e) {
 			if (aproximacion != null) {
 				JOptionPane.showMessageDialog(null, "No se puede calcular la aproximacion " + aproximacion.getNombre() + " con los datos ingresados");

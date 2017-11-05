@@ -5,6 +5,7 @@ import com.superior.model.dto.AproxData;
 import com.superior.model.dto.AproxTable;
 import com.superior.model.dto.AproximacionOperaciones;
 import com.superior.calculo.EcuacionDosIncognitasUtils;
+import com.superior.calculo.NumberUtils;
 
 public class AproxPotencial extends AproxBase implements AproximacionOperaciones {
 
@@ -17,12 +18,12 @@ public class AproxPotencial extends AproxBase implements AproximacionOperaciones
 		int contador = 0;
 		for (AproxData datos : tablaValores.getDatos()) {
 			valores[contador][0] = (contador + 1) + "";
-			valores[contador][1] = datos.x().toString();
-			valores[contador][2] = datos.y().toString();
-			valores[contador][3] = datos.lnX().toString();
-			valores[contador][4] = datos.lnXCuadrado().toString();
-			valores[contador][5] = datos.lnY().toString();
-			valores[contador][6] = datos.lnXlnY().toString();
+			valores[contador][1] = NumberUtils.formatter(datos.x(), cantidadDecimales);
+			valores[contador][2] = NumberUtils.formatter(datos.y(), cantidadDecimales);
+			valores[contador][3] = NumberUtils.formatter(datos.lnX(), cantidadDecimales);
+			valores[contador][4] = NumberUtils.formatter(datos.lnXCuadrado(), cantidadDecimales);
+			valores[contador][5] = NumberUtils.formatter(datos.lnY(), cantidadDecimales);
+			valores[contador][6] = NumberUtils.formatter(datos.lnXlnY(), cantidadDecimales);
 			contador++;
 		}
 		return valores;
@@ -44,7 +45,7 @@ public class AproxPotencial extends AproxBase implements AproximacionOperaciones
 	@Override
 	public void calcularFuncionAproximacion() {
 		EcuacionDosIncognitasUtils ecuacion = new EcuacionDosIncognitasUtils();
-		ecuacion.calcular(tablaValores.sumatorialnXCuadrado(), tablaValores.sumatorialnX(), tablaValores.sumatorialnXlnY(), tablaValores.sumatorialnX(), tablaValores.sumatoria1(), tablaValores.sumatorialnY(),cantidadDecimales);
+		ecuacion.calcular(tablaValores.sumatorialnXCuadrado(), tablaValores.sumatorialnX(), tablaValores.sumatorialnXlnY(), tablaValores.sumatorialnX(), tablaValores.sumatoria1(), tablaValores.sumatorialnY(), cantidadDecimales);
 		A = ecuacion.X();
 		B = num.redondear(Math.exp(ecuacion.Y()), cantidadDecimales);
 		detalleCalculadoConFuncionObtenida(ecuacion);
@@ -55,18 +56,15 @@ public class AproxPotencial extends AproxBase implements AproximacionOperaciones
 
 		return A * Math.pow(valorX, B);
 	}
-	
-	public void detalleCalculadoConFuncionObtenida(EcuacionDosIncognitasUtils ecuacion){
-		
+
+	public void detalleCalculadoConFuncionObtenida(EcuacionDosIncognitasUtils ecuacion) {
+
 		String detalle = ecuacion.detalleCalculo();
 		detalle += "\n --------------------------------------------------- ";
-		detalle += "\n La Funcion Potencial de minimos cuadrados es F(X) = "+ B +" X ^ " + A  ;
-		
-		this.detalleCalculo=detalle;
-		
+		detalle += "\n La Funcion Potencial de minimos cuadrados es F(X) = " + B + " X ^ " + A;
+
+		this.detalleCalculo = detalle;
+
 	}
-	
-	
-	
 
 }

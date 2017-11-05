@@ -182,9 +182,9 @@ public class IngresoNumerosForm extends javax.swing.JFrame {
 			JOptionPane.showMessageDialog(this, "Error. Debe ingresar la cantidad de Decimales.");
 			return;
 		}
-		int numero=0;
+		int numero = 0;
 		try {
-			 numero = Integer.parseInt(cantidadDecimales);
+			numero = Integer.parseInt(cantidadDecimales);
 			if (numero <= 0) {
 				JOptionPane.showMessageDialog(this, "Error. La cantidad de decimales debe ser un numero mayor a cero");
 				return;
@@ -198,8 +198,8 @@ public class IngresoNumerosForm extends javax.swing.JFrame {
 			JOptionPane.showMessageDialog(this, "Error. Debe ingresar al menos una coordenada");
 			return;
 		}
-		
-		if(this.datosListaCoordenadas.getSize()<2){
+
+		if (this.datosListaCoordenadas.getSize() < 2) {
 			JOptionPane.showMessageDialog(this, "Error. Debe ingresar al menos dos puntos.");
 			return;
 		}
@@ -213,9 +213,8 @@ public class IngresoNumerosForm extends javax.swing.JFrame {
 
 			tablaDatos.agregarPunto(Double.parseDouble(numeroX), Double.parseDouble(numeroY));
 		}
-		
-		
-		AproximacionPantalla aproxPantallaMenu = new AproximacionPantalla(tablaDatos,numero);
+
+		AproximacionPantalla aproxPantallaMenu = new AproximacionPantalla(tablaDatos, numero);
 		this.hide();
 	}
 

@@ -31,6 +31,8 @@ public class GraficoFuncionConCoordenadas extends javax.swing.JFrame {
 	List<Double> x;
 	List<Double> y;
 
+	private Boolean mostrarPuntos;
+
 	List<Double> xCoordenada;
 	List<Double> yCoordenada;
 
@@ -44,9 +46,7 @@ public class GraficoFuncionConCoordenadas extends javax.swing.JFrame {
 
 	private static Color COLOR_FONDO_GRAFICA = Color.white;
 
-	// http://foro.chuidiang.org/otras-herramientas-y-librerias/insertar-2-funciones-en-una-misma-grafica-con-jfreechart/
-	// constructor
-	public GraficoFuncionConCoordenadas(List<Double> xFuncionAprox, List<Double> yFuncionAprox, List<Double> xCoordenada, List<Double> yCoordenada, double divisionX, double divisionY, double xminimo, double xmaximo, double yminimo, double ymaximo) {
+	public GraficoFuncionConCoordenadas(List<Double> xFuncionAprox, List<Double> yFuncionAprox, List<Double> xCoordenada, List<Double> yCoordenada, double divisionX, double divisionY, double xminimo, double xmaximo, double yminimo, double ymaximo, boolean mostrarPuntos) {
 		super("GRAFICO COMPARATIVO");
 		this.x = xFuncionAprox;
 		this.y = yFuncionAprox;
@@ -62,7 +62,7 @@ public class GraficoFuncionConCoordenadas extends javax.swing.JFrame {
 		setSize(600, 570);
 		setLocationRelativeTo(null);
 		setVisible(true);
-
+		this.mostrarPuntos = mostrarPuntos;
 		this.xminimo = xminimo;
 		this.xmaximo = xmaximo;
 		this.yminimo = yminimo;
@@ -88,17 +88,17 @@ public class GraficoFuncionConCoordenadas extends javax.swing.JFrame {
 		ejey.add(new Double(0), new Double(0));
 		ejey.add(new Double(0), ymaximo);
 		// }
-
-		final XYSeries serie2 = new XYSeries("Puntos Ingresados");
-		for (int i = 0; i < xCoordenada.size(); i++) {
-			serie2.add(xCoordenada.get(i), yCoordenada.get(i));
-		}
-
 		final XYSeriesCollection collection = new XYSeriesCollection();
-		collection.addSeries(serie1);
-		collection.addSeries(serie2);
 		collection.addSeries(ejex);
 		collection.addSeries(ejey);
+		collection.addSeries(serie1);
+		if (this.mostrarPuntos) {
+			final XYSeries serie2 = new XYSeries("Puntos Ingresados");
+			for (int i = 0; i < xCoordenada.size(); i++) {
+				serie2.add(xCoordenada.get(i), yCoordenada.get(i));
+			}
+			collection.addSeries(serie2);
+		}
 
 		// XYDataset juegoDatos = new XYSeriesCollection(collection);
 
@@ -165,17 +165,20 @@ public class GraficoFuncionConCoordenadas extends javax.swing.JFrame {
 	// configuramos las líneas de las series (añadimos un círculo en los puntos
 	// y asignamos el color de cada serie)
 	private void configurarRendered(XYLineAndShapeRenderer renderer) {
-		renderer.setSeriesShapesVisible(0, false);
-		renderer.setSeriesShapesVisible(1, true);
 		renderer.setSeriesShapesVisible(2, false);
-		renderer.setSeriesShapesVisible(3, false);
+		if (mostrarPuntos) {
+			renderer.setSeriesShapesVisible(3, true);
+			renderer.setSeriesLinesVisible(3, false);
+		}
+		renderer.setSeriesShapesVisible(0, false);
+		renderer.setSeriesShapesVisible(1, false);
 		renderer.setSeriesLinesVisible(1, false);
 		renderer.setSeriesPaint(0, COLOR_SERIE_1);
 		renderer.setSeriesPaint(1, COLOR_SERIE_2);
 
-		renderer.setSeriesShapesVisible(2, false);
-		renderer.setSeriesShapesVisible(3, false);
-		renderer.setSeriesPaint(2, Color.BLACK);
-		renderer.setSeriesPaint(3, Color.BLACK);
+		renderer.setSeriesShapesVisible(0, false);
+		renderer.setSeriesShapesVisible(1, false);
+		renderer.setSeriesPaint(0, Color.BLACK);
+		renderer.setSeriesPaint(1, Color.BLACK);
 	}
 }

@@ -2,7 +2,7 @@ package com.superior.model.dto;
 
 import java.util.List;
 
-public interface AproximacionOperaciones extends Comparable<AproximacionOperaciones>{
+public interface AproximacionOperaciones extends Comparable<AproximacionOperaciones> {
 	public String[][] obtenerTablaCalculos();
 
 	public String[] obtenerFilaSumarizadora();
@@ -24,6 +24,6 @@ public interface AproximacionOperaciones extends Comparable<AproximacionOperacio
 	public List<Double> obtenerColumnaFuncionAplicada() throws Exception;
 
 	public String getNombre();
-	
+
 	public String detalleCalculo();
 }

@@ -10,22 +10,22 @@ import com.superior.model.AproxPotencial;
 
 public class AproxFactory {
 	public static AproximacionOperaciones crearAproximacion(String tipoAproximacion, AproxTable tablaValores, Integer cantidadDecimales) {
-		
-		if(tipoAproximacion==null){
-			JOptionPane.showMessageDialog(null, "Seleccione algun tipo de aproximaci�n");	
+
+		if (tipoAproximacion == null) {
+			JOptionPane.showMessageDialog(null, "Seleccione algun tipo de aproximaci�n");
 			return null;
 		}
 		if (tipoAproximacion.equalsIgnoreCase("LINEAL")) {
-			return new AproxLineal(tablaValores,cantidadDecimales);
+			return new AproxLineal(tablaValores, cantidadDecimales);
 		} else if (tipoAproximacion.equalsIgnoreCase("PARABOLA")) {
-			return new AproxParabola(tablaValores,cantidadDecimales);
+			return new AproxParabola(tablaValores, cantidadDecimales);
 		} else if (tipoAproximacion.equalsIgnoreCase("EXPONENCIAL")) {
-			return new AproxExponencial(tablaValores,cantidadDecimales);
+			return new AproxExponencial(tablaValores, cantidadDecimales);
 		} else if (tipoAproximacion.equalsIgnoreCase("POTENCIAL")) {
-			return new AproxPotencial(tablaValores,cantidadDecimales);
+			return new AproxPotencial(tablaValores, cantidadDecimales);
 		} else if (tipoAproximacion.equalsIgnoreCase("HIPERBOLA")) {
-			return new AproxHiperbola(tablaValores,cantidadDecimales);
-			}
+			return new AproxHiperbola(tablaValores, cantidadDecimales);
+		}
 		JOptionPane.showMessageDialog(null, "Seleccione algun tipo de aproximaci�n");
 		return null;
 	}

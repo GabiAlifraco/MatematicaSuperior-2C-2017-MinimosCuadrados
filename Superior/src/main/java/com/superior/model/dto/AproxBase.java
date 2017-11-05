@@ -109,15 +109,16 @@ public abstract class AproxBase implements Comparable<AproximacionOperaciones> {
 	protected abstract Double funcion(double valorX);
 
 	public String detalleCalculo() {
-		if(detalleCalculo==null){
+		if (detalleCalculo == null) {
 			calcularFuncionAproximacion();
 		}
 		return detalleCalculo;
 	}
-	
-	public String obtenerAoBParaDetalle(Double valor){
-		
-		if(valor >= 0) return ("+ " + valor);
-		return ("- "+ (valor)*-1);
+
+	public String obtenerAoBParaDetalle(Double valor) {
+
+		if (valor >= 0)
+			return ("+ " + valor);
+		return ("- " + (valor) * -1);
 	}
 }

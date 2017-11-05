@@ -1,6 +1,7 @@
 package com.superior.model;
 
 import com.superior.calculo.EcuacionDosIncognitasUtils;
+import com.superior.calculo.NumberUtils;
 import com.superior.model.dto.AproxBase;
 import com.superior.model.dto.AproxData;
 import com.superior.model.dto.AproxTable;
@@ -9,7 +10,7 @@ import com.superior.model.dto.AproximacionOperaciones;
 public class AproxHiperbola extends AproxBase implements AproximacionOperaciones {
 
 	public AproxHiperbola(AproxTable tablaValores, Integer cantidadDecimales) {
-		super(tablaValores, cantidadDecimales);		
+		super(tablaValores, cantidadDecimales);
 	}
 
 	public String[][] obtenerTablaCalculos() {
@@ -17,23 +18,18 @@ public class AproxHiperbola extends AproxBase implements AproximacionOperaciones
 		int contador = 0;
 		for (AproxData datos : tablaValores.getDatos()) {
 			valores[contador][0] = (contador + 1) + "";
-			valores[contador][1] = datos.x().toString();
-			valores[contador][2] = datos.y().toString();
-			valores[contador][3] = datos.xCuadrado().toString();
-			valores[contador][4] = datos.inversaY().toString();
-			valores[contador][5] = datos.XinversaY().toString();
+			valores[contador][1] = NumberUtils.formatter(datos.x(), cantidadDecimales);
+			valores[contador][2] = NumberUtils.formatter(datos.y(), cantidadDecimales);
+			valores[contador][3] = NumberUtils.formatter(datos.xCuadrado(), cantidadDecimales);
+			valores[contador][4] = NumberUtils.formatter(datos.inversaY(), cantidadDecimales);
+			valores[contador][5] = NumberUtils.formatter(datos.XinversaY(), cantidadDecimales);
 			contador++;
 		}
 		return valores;
 	}
 
 	public String[] obtenerFilaSumarizadora() {
-		return new String[] { "\u03A3",
-				tablaValores.sumatoriaX().toString(),
-				tablaValores.sumatoriaY().toString(),
-				tablaValores.sumatoriaXCuadrado().toString(),
-				tablaValores.sumatoriaInversaY().toString(),
-				tablaValores.sumatoriaXInversaY().toString() };
+		return new String[] { "\u03A3", tablaValores.sumatoriaX().toString(), tablaValores.sumatoriaY().toString(), tablaValores.sumatoriaXCuadrado().toString(), tablaValores.sumatoriaInversaY().toString(), tablaValores.sumatoriaXInversaY().toString() };
 	}
 
 	public String[] tablaCabecera() {
@@ -47,38 +43,31 @@ public class AproxHiperbola extends AproxBase implements AproximacionOperaciones
 	@Override
 	public void calcularFuncionAproximacion() {
 		EcuacionDosIncognitasUtils ecuacion = new EcuacionDosIncognitasUtils();
-		ecuacion.calcular(
-				tablaValores.sumatoriaXCuadrado(),
-				tablaValores.sumatoriaX(),
-				tablaValores.sumatoriaXInversaY(),
-				tablaValores.sumatoriaX(),
-				tablaValores.sumatoria1(),
-				tablaValores.sumatoriaInversaY(),
-				cantidadDecimales);
+		ecuacion.calcular(tablaValores.sumatoriaXCuadrado(), tablaValores.sumatoriaX(), tablaValores.sumatoriaXInversaY(), tablaValores.sumatoriaX(), tablaValores.sumatoria1(), tablaValores.sumatoriaInversaY(), cantidadDecimales);
 		A = ecuacion.X();
 		B = ecuacion.Y();
-		
-		A =num.redondear(Math.pow(ecuacion.X(), -1), cantidadDecimales);
-		B =num.redondear(ecuacion.Y()/ecuacion.X(), cantidadDecimales);
-		
+
+		A = num.redondear(Math.pow(ecuacion.X(), -1), cantidadDecimales);
+		B = num.redondear(ecuacion.Y() / ecuacion.X(), cantidadDecimales);
+
 		detalleCalculadoConFuncionObtenida(ecuacion);
 
 	}
-	
-public void detalleCalculadoConFuncionObtenida(EcuacionDosIncognitasUtils ecuacion){
-		
+
+	public void detalleCalculadoConFuncionObtenida(EcuacionDosIncognitasUtils ecuacion) {
+
 		String detalle = ecuacion.detalleCalculo();
 		detalle += "\n --------------------------------------------------- ";
-		detalle += "\n La Hiperbola de minimos cuadrados es H(X) = "+ A +" /( "+obtenerAoBParaDetalle(B) + " + X) ";
-		
-		this.detalleCalculo=detalle;
-		
+		detalle += "\n La Hiperbola de minimos cuadrados es H(X) = " + A + " /( " + obtenerAoBParaDetalle(B) + " + X) ";
+
+		this.detalleCalculo = detalle;
+
 	}
 
 	@Override
-	protected Double funcion( double valorX) {
-	
-		return A/(valorX+B);
+	protected Double funcion(double valorX) {
+
+		return A / (valorX + B);
 	}
 
 }

@@ -39,7 +39,7 @@ public class VerComparacionForm extends javax.swing.JFrame {
 	public VerComparacionForm(AproxTable datos, Integer cantidadDecimales) {
 		this.datos = datos;
 		this.cantidadDecimales = cantidadDecimales;
-		
+
 		initComponents();
 		this.lblMejorAproximacion.setText("");
 		setTitle("AMIC");
@@ -151,21 +151,21 @@ public class VerComparacionForm extends javax.swing.JFrame {
 	private javax.swing.JLabel lblMejorAproximacion;
 
 	public Integer getDecimales() {
-	
+
 		return this.cantidadDecimales;
 	}
 
 	public AproxTable getTV() {
-		
+
 		return this.datos;
 	}
 
 	public JTable tablaCalculos() {
-	
+
 		return tablaComparacion;
 	}
-	
-	public void setearTexto(String text){
+
+	public void setearTexto(String text) {
 		lblMejorAproximacion.setText(text);
 	}
 }

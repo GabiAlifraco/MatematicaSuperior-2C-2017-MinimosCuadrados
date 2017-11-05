@@ -7,7 +7,7 @@ import javax.swing.table.TableCellEditor;
 public class VistaCalculosForm extends javax.swing.JFrame {
 
 	@SuppressWarnings("deprecation")
-	public VistaCalculosForm(DefaultTableModel valores,String detalleCalculo) {
+	public VistaCalculosForm(DefaultTableModel valores, String detalleCalculo) {
 		initComponents();
 		this.tablaCalculos.setModel(valores);
 		this.tablaCalculos.enable(true);

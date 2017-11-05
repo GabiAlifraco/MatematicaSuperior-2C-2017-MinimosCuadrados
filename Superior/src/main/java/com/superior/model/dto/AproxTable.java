@@ -35,7 +35,7 @@ public class AproxTable {
 		for (AproxData dato : datos) {
 			sumatoria += num.redondear(dato.x(), cantidadDecimales);
 		}
-		return sumatoria;
+		return num.redondear(sumatoria, cantidadDecimales);
 	}
 
 	public Double sumatoriaY() {
@@ -43,7 +43,7 @@ public class AproxTable {
 		for (AproxData dato : datos) {
 			sumatoria += num.redondear(dato.y(), cantidadDecimales);
 		}
-		return sumatoria;
+		return num.redondear(sumatoria, cantidadDecimales);
 	}
 
 	public Double sumatoriaXY() {
@@ -51,7 +51,7 @@ public class AproxTable {
 		for (AproxData dato : datos) {
 			sumatoria += num.redondear(dato.xy(), cantidadDecimales);
 		}
-		return sumatoria;
+		return num.redondear(sumatoria, cantidadDecimales);
 	}
 
 	public Double sumatoriaXCuadrado() {
@@ -59,85 +59,87 @@ public class AproxTable {
 		for (AproxData dato : datos) {
 			sumatoria += num.redondear(dato.xCuadrado(), cantidadDecimales);
 		}
-		return sumatoria;
+		return num.redondear(sumatoria, cantidadDecimales);
 	}
+
 	public Double sumatoriaXlnY() {
 		Double sumatoria = 0D;
 		for (AproxData dato : datos) {
 			sumatoria += num.redondear(dato.XlnY(), cantidadDecimales);
 		}
-		return sumatoria;
+		return num.redondear(sumatoria, cantidadDecimales);
 	}
-	
+
 	public Double sumatorialnY() {
 		Double sumatoria = 0D;
 		for (AproxData dato : datos) {
 			sumatoria += num.redondear(dato.lnY(), cantidadDecimales);
 		}
-		return sumatoria;
+		return num.redondear(sumatoria, cantidadDecimales);
 	}
+
 	public Double sumatorialnX() {
 		Double sumatoria = 0D;
 		for (AproxData dato : datos) {
 			sumatoria += num.redondear(dato.lnX(), cantidadDecimales);
 		}
-		return sumatoria;
+		return num.redondear(sumatoria, cantidadDecimales);
 	}
-	
+
 	public Double sumatorialnXCuadrado() {
 		Double sumatoria = 0D;
 		for (AproxData dato : datos) {
 			sumatoria += num.redondear(dato.lnXCuadrado(), cantidadDecimales);
 		}
-		return sumatoria;
+		return num.redondear(sumatoria, cantidadDecimales);
 	}
-	
+
 	public Double sumatorialnXlnY() {
 		Double sumatoria = 0D;
 		for (AproxData dato : datos) {
 			sumatoria += num.redondear(dato.lnXlnY(), cantidadDecimales);
 		}
-		return sumatoria;
+		return num.redondear(sumatoria, cantidadDecimales);
 	}
-	
+
 	public Double sumatoriaXCubo() {
 		Double sumatoria = 0D;
 		for (AproxData dato : datos) {
 			sumatoria += num.redondear(dato.xCubo(), cantidadDecimales);
 		}
-		return sumatoria;
+		return num.redondear(sumatoria, cantidadDecimales);
 	}
-	
+
 	public Double sumatoriaXCuarta() {
 		Double sumatoria = 0D;
 		for (AproxData dato : datos) {
 			sumatoria += num.redondear(dato.xCuarta(), cantidadDecimales);
 		}
-		return sumatoria;
+		return num.redondear(sumatoria, cantidadDecimales);
 	}
-	
+
 	public Double sumatoriaYXCuadrado() {
 		Double sumatoria = 0D;
 		for (AproxData dato : datos) {
 			sumatoria += num.redondear(dato.yxCuadrado(), cantidadDecimales);
 		}
-		return sumatoria;
+		return num.redondear(sumatoria, cantidadDecimales);
 	}
-	
+
 	public Double sumatoriaInversaY() {
 		Double sumatoria = 0D;
 		for (AproxData dato : datos) {
 			sumatoria += num.redondear(dato.inversaY(), cantidadDecimales);
 		}
-		return sumatoria;
+		return num.redondear(sumatoria, cantidadDecimales);
 	}
-	
+
 	public Double sumatoriaXInversaY() {
 		Double sumatoria = 0D;
 		for (AproxData dato : datos) {
 			sumatoria += num.redondear(dato.XinversaY(), cantidadDecimales);
 		}
-		return sumatoria;
+		return num.redondear(sumatoria, cantidadDecimales);
 	}
-	
+
 }

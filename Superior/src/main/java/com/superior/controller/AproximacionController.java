@@ -12,6 +12,7 @@ import com.superior.model.dto.AproxFactory;
 import com.superior.model.dto.AproxTable;
 import com.superior.model.dto.AproximacionOperaciones;
 import com.superior.view.GraficoFuncionConCoordenadas;
+import com.superior.view.Messages_ES;
 import com.superior.view.VerComparacionForm;
 import com.superior.view.VistaCalculosForm;
 
@@ -195,7 +196,7 @@ public class AproximacionController implements IAproximacionController {
 			form.tablaCalculos().setModel(dtm);
 
 			Collections.sort(aproximacionesElegidas);
-			form.setearTexto("La mejor aproximaci�n es " + aproximacionesElegidas.get(0).getNombre() + ".Su error cuadratico es " + aproximacionesElegidas.get(0).minimoErrorCometido());
+			form.setearTexto("La mejor " + Messages_ES.aproximacion + " es " + aproximacionesElegidas.get(0).getNombre() + ".Su error cuadratico es " + aproximacionesElegidas.get(0).minimoErrorCometido());
 		} catch (Exception e) {
 			JOptionPane.showMessageDialog(null, e.getMessage());
 		}

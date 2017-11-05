@@ -7,12 +7,14 @@ import com.superior.model.AproxHiperbola;
 import com.superior.model.AproxLineal;
 import com.superior.model.AproxParabola;
 import com.superior.model.AproxPotencial;
+import com.superior.view.Messages_ES;
 
 public class AproxFactory {
 	public static AproximacionOperaciones crearAproximacion(String tipoAproximacion, AproxTable tablaValores, Integer cantidadDecimales) {
 
 		if (tipoAproximacion == null) {
-			JOptionPane.showMessageDialog(null, "Seleccione algun tipo de aproximaci�n");
+
+			JOptionPane.showMessageDialog(null, Messages_ES.alertTipoAproximacion);
 			return null;
 		}
 		if (tipoAproximacion.equalsIgnoreCase("LINEAL")) {

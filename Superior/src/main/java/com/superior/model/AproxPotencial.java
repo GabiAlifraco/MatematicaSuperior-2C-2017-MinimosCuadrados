@@ -30,7 +30,7 @@ public class AproxPotencial extends AproxBase implements AproximacionOperaciones
 	}
 
 	public String[] obtenerFilaSumarizadora() {
-		return new String[] { "\u03A3", tablaValores.sumatoriaX().toString(), tablaValores.sumatoriaY().toString(), tablaValores.sumatorialnX().toString(), tablaValores.sumatorialnXCuadrado().toString(), tablaValores.sumatorialnY().toString(), tablaValores.sumatorialnXlnY().toString() };
+		return new String[] { "\u03A3", NumberUtils.formatter(tablaValores.sumatoriaX(), cantidadDecimales),NumberUtils.formatter( tablaValores.sumatoriaY(), cantidadDecimales), NumberUtils.formatter(tablaValores.sumatorialnX(), cantidadDecimales),NumberUtils.formatter( tablaValores.sumatorialnXCuadrado(), cantidadDecimales),NumberUtils.formatter( tablaValores.sumatorialnY(), cantidadDecimales),NumberUtils.formatter(tablaValores.sumatorialnXlnY(), cantidadDecimales) };
 	}
 
 	public String[] tablaCabecera() {

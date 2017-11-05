@@ -29,7 +29,7 @@ public class AproxHiperbola extends AproxBase implements AproximacionOperaciones
 	}
 
 	public String[] obtenerFilaSumarizadora() {
-		return new String[] { "\u03A3", tablaValores.sumatoriaX().toString(), tablaValores.sumatoriaY().toString(), tablaValores.sumatoriaXCuadrado().toString(), tablaValores.sumatoriaInversaY().toString(), tablaValores.sumatoriaXInversaY().toString() };
+		return new String[] { "\u03A3",NumberUtils.formatter(tablaValores.sumatoriaX(), cantidadDecimales), NumberUtils.formatter(tablaValores.sumatoriaY(), cantidadDecimales), NumberUtils.formatter(tablaValores.sumatoriaXCuadrado(), cantidadDecimales), NumberUtils.formatter(tablaValores.sumatoriaInversaY(), cantidadDecimales),NumberUtils.formatter( tablaValores.sumatoriaXInversaY(), cantidadDecimales) };
 	}
 
 	public String[] tablaCabecera() {

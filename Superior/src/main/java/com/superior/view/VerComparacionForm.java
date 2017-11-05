@@ -54,7 +54,7 @@ public class VerComparacionForm extends javax.swing.JFrame {
 
 	private void cmbCompararActionPerformed(java.awt.event.ActionEvent evt) {
 		IAproximacionController aproxController = new AproximacionController();
-		aproxController.compararErrorFunciones(this);
+		aproxController.compararErrorFunciones(this,cantidadDecimales);
 	}
 
 	private void cmbVolverActionPerformed(java.awt.event.ActionEvent evt) {

@@ -36,7 +36,7 @@ public class AproxLineal extends AproxBase implements AproximacionOperaciones {
 	}
 
 	public String[] obtenerFilaSumarizadora() {
-		return new String[] { "\u03A3", tablaValores.sumatoriaX().toString(), tablaValores.sumatoriaY().toString(), tablaValores.sumatoriaXY().toString(), tablaValores.sumatoriaXCuadrado().toString() };
+		return new String[] { "\u03A3", NumberUtils.formatter(tablaValores.sumatoriaX(), cantidadDecimales), NumberUtils.formatter(tablaValores.sumatoriaY(), cantidadDecimales), NumberUtils.formatter(tablaValores.sumatoriaXY(), cantidadDecimales), NumberUtils.formatter(tablaValores.sumatoriaXCuadrado(), cantidadDecimales)};
 	}
 
 	public String[] tablaCabecera() {

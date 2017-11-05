@@ -35,7 +35,7 @@ public class AproxParabola extends AproxBase implements AproximacionOperaciones 
 
 	public String[] obtenerFilaSumarizadora() {
 
-		return new String[] { "\u03A3", tablaValores.sumatoriaX().toString(), tablaValores.sumatoriaY().toString(), tablaValores.sumatoriaXY().toString(), tablaValores.sumatoriaXCuadrado().toString(), tablaValores.sumatoriaXCubo().toString(), tablaValores.sumatoriaXCuarta().toString(), tablaValores.sumatoriaYXCuadrado().toString() };
+		return new String[] { "\u03A3",NumberUtils.formatter( tablaValores.sumatoriaX(), cantidadDecimales), NumberUtils.formatter(tablaValores.sumatoriaY(), cantidadDecimales), NumberUtils.formatter(tablaValores.sumatoriaXY(), cantidadDecimales),NumberUtils.formatter( tablaValores.sumatoriaXCuadrado(), cantidadDecimales), NumberUtils.formatter(tablaValores.sumatoriaXCubo(), cantidadDecimales),NumberUtils.formatter( tablaValores.sumatoriaXCuarta(), cantidadDecimales),NumberUtils.formatter( tablaValores.sumatoriaYXCuadrado(), cantidadDecimales) };
 	}
 
 	public String[] tablaCabecera() {

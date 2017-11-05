@@ -7,6 +7,7 @@ import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
+import com.superior.calculo.NumberUtils;
 import com.superior.model.dto.AproxData;
 import com.superior.model.dto.AproxFactory;
 import com.superior.model.dto.AproxTable;
@@ -158,7 +159,7 @@ public class AproximacionController implements IAproximacionController {
 		return diferencia / 20;
 	}
 
-	public void compararErrorFunciones(VerComparacionForm form) {
+	public void compararErrorFunciones(VerComparacionForm form,int decimales) {
 		List<AproximacionOperaciones> aproximacionesElegidas = obtenerAproximacionesElegidas(form);
 
 		if (aproximacionesElegidas == null)
@@ -184,12 +185,12 @@ public class AproximacionController implements IAproximacionController {
 			String[][] tabla = new String[cantidadFilas][3 + (2 * aproximacionesElegidas.size())];
 			for (int i = 0; i < cantidadFilas; i++) {
 				tabla[i][0] = i + 1 + "";
-				tabla[i][1] = form.getTV().getDatos().get(i).x().toString();
-				tabla[i][2] = form.getTV().getDatos().get(i).y().toString();
+				tabla[i][1] =NumberUtils.formatter(form.getTV().getDatos().get(i).x(),decimales);
+				tabla[i][2] =NumberUtils.formatter( form.getTV().getDatos().get(i).y(),decimales);
 				for (int j = 0; j < columnasErrores.size(); j++) {
 
-					tabla[i][j + 3] = columnasValores.get(j).get(i).toString();
-					tabla[i][j + 3 + aproximacionesElegidas.size()] = columnasErrores.get(j).get(i).toString();
+					tabla[i][j + 3] = NumberUtils.formatter(columnasValores.get(j).get(i),decimales);
+					tabla[i][j + 3 + aproximacionesElegidas.size()] = NumberUtils.formatter(columnasErrores.get(j).get(i),decimales);
 				}
 			}
 			DefaultTableModel dtm = new DefaultTableModel(tabla, cabecera);

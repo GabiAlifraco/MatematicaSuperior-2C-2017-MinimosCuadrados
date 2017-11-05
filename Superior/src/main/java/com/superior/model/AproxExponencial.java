@@ -30,7 +30,7 @@ public class AproxExponencial extends AproxBase implements AproximacionOperacion
 	}
 
 	public String[] obtenerFilaSumarizadora() {
-		return new String[] { "\u03A3", tablaValores.sumatoriaX().toString(), tablaValores.sumatoriaY().toString(), tablaValores.sumatoriaXlnY().toString(), tablaValores.sumatoriaXCuadrado().toString(), tablaValores.sumatorialnY().toString() };
+		return new String[] { "\u03A3", NumberUtils.formatter( tablaValores.sumatoriaX(), cantidadDecimales),  NumberUtils.formatter(tablaValores.sumatoriaY(), cantidadDecimales),  NumberUtils.formatter(tablaValores.sumatoriaXlnY(), cantidadDecimales), NumberUtils.formatter( tablaValores.sumatoriaXCuadrado(), cantidadDecimales), NumberUtils.formatter( tablaValores.sumatorialnY(), cantidadDecimales) };
 	}
 
 	public String[] tablaCabecera() {

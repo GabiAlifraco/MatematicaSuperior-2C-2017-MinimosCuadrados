@@ -11,5 +11,5 @@ public interface IAproximacionController {
 
 	public void visualizarFuncionAproximadaConCoordenadas(String tipoAproximacion, AproxTable datos, Integer cantidadDecimales);
 
-	public void compararErrorFunciones(VerComparacionForm form);
+	public void compararErrorFunciones(VerComparacionForm form,int decimales);
 }

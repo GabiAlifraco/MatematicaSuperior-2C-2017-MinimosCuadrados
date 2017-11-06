@@ -96,7 +96,7 @@ public abstract class AproxBase implements Comparable<AproximacionOperaciones> {
 				calcularFuncionAproximacion();
 
 			} catch (Exception e) {
-				throw new Exception("No es posible para los datos ingresados calcular una aproximaciï¿½n " + this.getNombre());
+				throw new Exception("No es posible para los datos ingresados calcular una aproximación " + this.getNombre());
 			}
 		}
 		return num.redondear(funcion(x), cantidadDecimales);

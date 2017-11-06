@@ -7,7 +7,7 @@ public class Messages_ES {
 	public static String cmdVisualizarAproximacion="Visualizar Aproximación";
 	public static String lblTipoAproximacion="Tipo de Aproximaciín";
 	public static String cmdVerCalculos="Ver Cálculos";
-	public static String alertTipoAproximacion =  "Seleccione algun tipo de aproximaciï¿½n";
+	public static String alertTipoAproximacion =  "Seleccione algun tipo de aproximación";
 	public static String aproximacion = "Aproximación";
 	
 	

@@ -131,7 +131,7 @@ public class AproximacionPantalla extends javax.swing.JFrame {
 			}
 		});
 		getContentPane().add(cmdFinalizar);
-		cmdFinalizar.setBounds(270, 290, 80, 23);
+		cmdFinalizar.setBounds(270, 290, 100, 23);
 
 		jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/superior/view/principal.jpg"))); // NOI18N
 		getContentPane().add(jLabel1);

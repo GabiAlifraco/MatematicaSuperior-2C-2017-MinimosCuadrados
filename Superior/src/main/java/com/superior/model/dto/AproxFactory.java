@@ -28,7 +28,7 @@ public class AproxFactory {
 		} else if (tipoAproximacion.equalsIgnoreCase("HIPERBOLA")) {
 			return new AproxHiperbola(tablaValores, cantidadDecimales);
 		}
-		JOptionPane.showMessageDialog(null, "Seleccione algun tipo de aproximaciï¿½n");
+		JOptionPane.showMessageDialog(null, "Seleccione algun tipo de aproximación");
 		return null;
 	}
 }

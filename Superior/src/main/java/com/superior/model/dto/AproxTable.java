@@ -12,6 +12,10 @@ public class AproxTable {
 
 	private NumberUtils num = new NumberUtils();
 
+	public Integer getCantidadDecimales() {
+		return cantidadDecimales;
+	}
+
 	public AproxTable(Integer cantidadDecimales) {
 		super();
 		this.cantidadDecimales = cantidadDecimales;

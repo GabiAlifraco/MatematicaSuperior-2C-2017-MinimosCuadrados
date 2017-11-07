@@ -178,7 +178,7 @@ public class AproximacionController implements IAproximacionController {
 				columnasValores.add(aproximacion.obtenerColumnaFuncionAplicada());
 				columnasErrores.add(aproximacion.obtenerColumnaErrores());
 				cabecera[indiceCabecara] = aproximacion.getNombre();
-				cabecera[indiceCabecara + aproximacionesElegidas.size()] = aproximacion.getNombre();
+				cabecera[indiceCabecara + aproximacionesElegidas.size()] = "E. "+ aproximacion.getNombre();
 				indiceCabecara++;
 			}
 			int cantidadFilas = form.getTV().getDatos().size();

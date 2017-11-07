@@ -78,15 +78,21 @@ public abstract class AproxBase implements Comparable<AproximacionOperaciones> {
 		AproxData puntoMinimo = tablaValores.getDatos().get(0);
 		AproxData puntoMaximo = tablaValores.getDatos().get(tablaValores.getDatos().size() - 1);
 
-		double incrementoX = 0;
-		incrementoX = Math.abs((puntoMinimo.x() - puntoMaximo.x())) / 200;
-
-		for (int i = 0; i < 200; i++) {
-			Double x = puntoMinimo.x() + i * incrementoX;
-			Double y = aplicarFuncion(puntoMinimo.x() + i * incrementoX);
+		double incrementoX = 0.20;
+//		int tope = (int) (Math.abs((puntoMinimo.x() - puntoMaximo.x())) * 4);
+//		incrementoX = Math.abs((puntoMinimo.x() - puntoMaximo.x())) / tope;
+		double tope = puntoMaximo.x();
+		double i = puntoMinimo.x();
+		while( i <= tope) {
+			Double x = i  ;
+			Double y = aplicarFuncion(x);
 			AproxData puntoGrafica = new AproxData(x, y, cantidadDecimales);
 			puntosGrafica.add(puntoGrafica);
+			i+=incrementoX;
 		}
+		Double y = aplicarFuncion(i);
+		AproxData puntoGrafica = new AproxData(i, y, cantidadDecimales);
+		puntosGrafica.add(puntoGrafica);
 		return puntosGrafica;
 	}
 

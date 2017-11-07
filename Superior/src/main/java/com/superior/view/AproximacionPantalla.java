@@ -5,6 +5,9 @@ import javax.swing.JFrame;
 import com.superior.controller.AproximacionController;
 import com.superior.controller.IAproximacionController;
 import com.superior.model.dto.AproxTable;
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class AproximacionPantalla extends javax.swing.JFrame {
 
@@ -22,7 +25,7 @@ public class AproximacionPantalla extends javax.swing.JFrame {
 		setBounds(100, 100, 544, 360);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setResizable(false);
-		setSize(430, 350);
+		setSize(438, 414);
 		setLocationRelativeTo(null);
 		setVisible(true);
 
@@ -64,6 +67,12 @@ public class AproximacionPantalla extends javax.swing.JFrame {
 		return null;
 	}
 
+	private void cmdVolver(ActionEvent arg0) {
+		new IngresoNumerosForm(datos);
+		this.hide();
+
+	}
+
 	// <editor-fold defaultstate="collapsed" desc="Generated Code">
 	private void initComponents() {
 
@@ -78,6 +87,17 @@ public class AproximacionPantalla extends javax.swing.JFrame {
 
 		setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 		getContentPane().setLayout(null);
+
+		JButton btnVolver = new JButton();
+		btnVolver.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				cmdVolver(arg0);
+			}
+
+		});
+		btnVolver.setText("Volver ");
+		btnVolver.setBounds(70, 317, 280, 23);
+		getContentPane().add(btnVolver);
 
 		jLabel2.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
 		jLabel2.setText(Messages_ES.lblTipoAproximacion);
@@ -122,7 +142,7 @@ public class AproximacionPantalla extends javax.swing.JFrame {
 			}
 		});
 		getContentPane().add(cmdCompararAproximaciones);
-		cmdCompararAproximaciones.setBounds(70, 290, 190, 23);
+		cmdCompararAproximaciones.setBounds(70, 290, 280, 23);
 
 		cmdFinalizar.setText("Finalizar");
 		cmdFinalizar.addActionListener(new java.awt.event.ActionListener() {
@@ -131,7 +151,7 @@ public class AproximacionPantalla extends javax.swing.JFrame {
 			}
 		});
 		getContentPane().add(cmdFinalizar);
-		cmdFinalizar.setBounds(270, 290, 100, 23);
+		cmdFinalizar.setBounds(70, 351, 280, 23);
 
 		jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/superior/view/principal.jpg"))); // NOI18N
 		getContentPane().add(jLabel1);

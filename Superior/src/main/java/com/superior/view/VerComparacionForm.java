@@ -6,6 +6,7 @@ import javax.swing.JTable;
 import com.superior.controller.AproximacionController;
 import com.superior.controller.IAproximacionController;
 import com.superior.model.dto.AproxTable;
+import java.awt.Color;
 
 public class VerComparacionForm extends javax.swing.JFrame {
 
@@ -37,6 +38,7 @@ public class VerComparacionForm extends javax.swing.JFrame {
 	}
 
 	public VerComparacionForm(AproxTable datos, Integer cantidadDecimales) {
+		getContentPane().setBackground(Color.WHITE);
 		this.datos = datos;
 		this.cantidadDecimales = cantidadDecimales;
 
@@ -47,7 +49,7 @@ public class VerComparacionForm extends javax.swing.JFrame {
 		setBounds(100, 100, 544, 360);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setResizable(false);
-		setSize(630, 480);
+		setSize(697, 448);
 		setLocationRelativeTo(null);
 		setVisible(true);
 	}
@@ -80,7 +82,7 @@ public class VerComparacionForm extends javax.swing.JFrame {
 
 		chkHiberbola.setLabel("Hiperbola");
 		getContentPane().add(chkHiberbola);
-		chkHiberbola.setBounds(500, 30, 100, 20);
+		chkHiberbola.setBounds(581, 30, 100, 20);
 
 		chkLineal.setLabel("Lineal");
 		getContentPane().add(chkLineal);
@@ -88,15 +90,15 @@ public class VerComparacionForm extends javax.swing.JFrame {
 
 		chkParabola.setLabel("Parábola");
 		getContentPane().add(chkParabola);
-		chkParabola.setBounds(140, 30, 100, 20);
+		chkParabola.setBounds(146, 30, 100, 20);
 
 		chkPotencial.setLabel("Potencial");
 		getContentPane().add(chkPotencial);
-		chkPotencial.setBounds(380, 30, 100, 20);
+		chkPotencial.setBounds(440, 30, 100, 20);
 
 		chkExponencial.setLabel("Exponencial");
 		getContentPane().add(chkExponencial);
-		chkExponencial.setBounds(260, 30, 100, 20);
+		chkExponencial.setBounds(284, 30, 100, 20);
 
 		tablaComparacion.setModel(new javax.swing.table.DefaultTableModel(new Object[][] {
 
@@ -106,7 +108,7 @@ public class VerComparacionForm extends javax.swing.JFrame {
 		jScrollPane1.setViewportView(tablaComparacion);
 
 		getContentPane().add(jScrollPane1);
-		jScrollPane1.setBounds(20, 138, 580, 220);
+		jScrollPane1.setBounds(10, 131, 671, 220);
 
 		cmbComparar.setText("Comparar");
 		cmbComparar.addActionListener(new java.awt.event.ActionListener() {
@@ -115,7 +117,7 @@ public class VerComparacionForm extends javax.swing.JFrame {
 			}
 		});
 		getContentPane().add(cmbComparar);
-		cmbComparar.setBounds(260, 70, 120, 23);
+		cmbComparar.setBounds(284, 76, 120, 23);
 
 		cmbVolver.setText("Volver");
 		cmbVolver.addActionListener(new java.awt.event.ActionListener() {
@@ -124,7 +126,7 @@ public class VerComparacionForm extends javax.swing.JFrame {
 			}
 		});
 		getContentPane().add(cmbVolver);
-		cmbVolver.setBounds(500, 369, 90, 23);
+		cmbVolver.setBounds(577, 379, 90, 23);
 
 		lblMejorAproximacion = new javax.swing.JLabel();
 		lblMejorAproximacion.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -134,7 +136,7 @@ public class VerComparacionForm extends javax.swing.JFrame {
 
 		jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/superior/view/principal.jpg"))); // NOI18N
 		getContentPane().add(jLabel1);
-		jLabel1.setBounds(0, 0, 625, 470);
+		jLabel1.setBounds(30, 0, 691, 440);
 
 	}
 

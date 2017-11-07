@@ -15,7 +15,24 @@ public class IngresoNumerosForm extends javax.swing.JFrame {
 	ListModel<String> datosListaCoordenadas;
 
 	public IngresoNumerosForm() {
+		datosListaCoordenadas = new DefaultListModel();
 		initComponentsJ();
+	}
+
+	public IngresoNumerosForm(AproxTable datos) {
+		datosListaCoordenadas = new DefaultListModel();
+		initComponentsJ();
+
+		for (AproxData dato : datos.getDatos()) {
+			String coordenada = "(" + dato.x() + ";" + dato.y() + ")";
+			((DefaultListModel) datosListaCoordenadas).addElement(coordenada);
+		}
+		this.txtCantidadDecimales.setText(datos.getCantidadDecimales().toString());
+		this.lstCoordenadas.setModel(this.datosListaCoordenadas);
+	}
+
+	private void initComponentsJ() {
+
 		setTitle("AMIC");
 		setAutoRequestFocus(false);
 		setBounds(100, 100, 544, 360);
@@ -24,11 +41,6 @@ public class IngresoNumerosForm extends javax.swing.JFrame {
 		setSize(430, 310);
 		setLocationRelativeTo(null);
 		setVisible(true);
-
-		datosListaCoordenadas = new DefaultListModel();
-	}
-
-	private void initComponentsJ() {
 
 		jProgressBar1 = new javax.swing.JProgressBar();
 		jScrollPane1 = new javax.swing.JScrollPane();

@@ -172,7 +172,7 @@ public class GraficoFuncionConCoordenadas extends javax.swing.JFrame {
 		}
 		renderer.setSeriesShapesVisible(0, false);
 		renderer.setSeriesShapesVisible(1, false);
-		renderer.setSeriesLinesVisible(1, false);
+//		renderer.setSeriesLinesVisible(1, false);
 		renderer.setSeriesPaint(0, COLOR_SERIE_1);
 		renderer.setSeriesPaint(1, COLOR_SERIE_2);
 

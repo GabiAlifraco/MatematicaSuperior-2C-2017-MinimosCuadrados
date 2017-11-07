@@ -149,12 +149,12 @@ public class IngresoNumerosForm extends javax.swing.JFrame {
 		String valorY = this.txtCoordenadaY.getText();
 
 		if (valorX.isEmpty()) {
-			JOptionPane.showMessageDialog(this, "Error. Debe ingresar la coordenad X.");
+			JOptionPane.showMessageDialog(this, "Error. Debe ingresar la coordenada X.");
 			return;
 		}
 
 		if (valorY.isEmpty()) {
-			JOptionPane.showMessageDialog(this, "Error. Debe ingresar la coordenad Y.");
+			JOptionPane.showMessageDialog(this, "Error. Debe ingresar la coordenada Y.");
 			return;
 		}
 

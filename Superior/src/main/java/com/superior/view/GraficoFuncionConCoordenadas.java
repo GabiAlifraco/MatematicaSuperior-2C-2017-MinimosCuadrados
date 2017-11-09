@@ -2,9 +2,11 @@ package com.superior.view;
 
 import java.awt.Color;
 import java.awt.image.BufferedImage;
+import java.text.NumberFormat;
 import java.util.List;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.JFreeChart;
@@ -76,21 +78,8 @@ public class GraficoFuncionConCoordenadas extends javax.swing.JFrame {
 			serie1.add(x.get(i), y.get(i));
 		}
 
-		final XYSeries ejex = new XYSeries("Eje X");
-
-		ejex.add(xminimo, new Double(0));
-		ejex.add(new Double(0), new Double(0));
-		ejex.add(xmaximo, new Double(0));
-
-		final XYSeries ejey = new XYSeries("Eje Y");
-		// for (int i = 0; i < y.size(); i++) {
-		ejey.add(new Double(0), yminimo);
-		ejey.add(new Double(0), new Double(0));
-		ejey.add(new Double(0), ymaximo);
-		// }
 		final XYSeriesCollection collection = new XYSeriesCollection();
-		collection.addSeries(ejex);
-		collection.addSeries(ejey);
+
 		collection.addSeries(serie1);
 		if (this.mostrarPuntos) {
 			final XYSeries serie2 = new XYSeries("Puntos Ingresados");
@@ -99,8 +88,6 @@ public class GraficoFuncionConCoordenadas extends javax.swing.JFrame {
 			}
 			collection.addSeries(serie2);
 		}
-
-		// XYDataset juegoDatos = new XYSeriesCollection(collection);
 
 		JFreeChart chart = crearGrafica(collection);
 
@@ -111,11 +98,16 @@ public class GraficoFuncionConCoordenadas extends javax.swing.JFrame {
 
 	// supongo que esto es demaciado obvio pero sino entienden pregunten...
 	public void paint(java.awt.Graphics g) {
-		// super.paint(g);
-		if (grafica == null) {
-			grafica = this.creaImagen();
+		try {
+			// super.paint(g);
+			if (grafica == null) {
+				grafica = this.creaImagen();
+			}
+			g.drawImage(grafica, 30, 30, null);
+		} catch (Exception e) {
+			JOptionPane.showMessageDialog(this, "Error. No es posible graficar la aproximacion");
+			this.hide();
 		}
-		g.drawImage(grafica, 30, 30, null);
 	}
 
 	public JFreeChart crearGrafica(XYSeriesCollection dataset) {
@@ -129,10 +121,10 @@ public class GraficoFuncionConCoordenadas extends javax.swing.JFrame {
 		configurarPlot(plot);
 
 		final NumberAxis domainAxis = (NumberAxis) plot.getDomainAxis();
-		configurarDomainAxis(domainAxis, divisionX);
+		configurarDomainAxis(domainAxis, divisionX, xminimo, xmaximo);
 
 		final NumberAxis rangeAxis = (NumberAxis) plot.getRangeAxis();
-		configurarRangeAxis(rangeAxis, divisionY);
+		configurarRangeAxis(rangeAxis, divisionY, yminimo, ymaximo);
 		//
 		final XYLineAndShapeRenderer renderer = (XYLineAndShapeRenderer) plot.getRenderer();
 		configurarRendered(renderer);
@@ -149,36 +141,46 @@ public class GraficoFuncionConCoordenadas extends javax.swing.JFrame {
 
 	// configuramos el eje X de la gráfica (se muestran números enteros y de uno
 	// en uno)
-	private void configurarDomainAxis(NumberAxis domainAxis, double division) {
+	private void configurarDomainAxis(NumberAxis domainAxis, double division, double xmin, double xmax) {
+
 		domainAxis.setStandardTickUnits(NumberAxis.createIntegerTickUnits());
-		domainAxis.setTickUnit(new NumberTickUnit(division));
+		NumberFormat numerFormat = NumberFormat.getInstance();
+		numerFormat.setMaximumFractionDigits(10);
+		NumberTickUnit numero = new NumberTickUnit(division, numerFormat);
+		domainAxis.setTickUnit(numero);
+		domainAxis.setRange(xmin - divisionX, xmax + divisionX);
 	}
 
 	// configuramos el eje y de la gráfica (números enteros de dos en dos y
 	// rango entre 120 y 135)
-	private void configurarRangeAxis(NumberAxis rangeAxis, double division) {
+	private void configurarRangeAxis(NumberAxis rangeAxis, double division, double ymin, double ymax) {
+
 		rangeAxis.setStandardTickUnits(NumberAxis.createIntegerTickUnits());
-		rangeAxis.setTickUnit(new NumberTickUnit(division));
-		// rangeAxis.setRange(120, 135);
+		NumberFormat numerFormat = NumberFormat.getInstance();
+		numerFormat.setMaximumFractionDigits(10);
+		NumberTickUnit numero = new NumberTickUnit(division, numerFormat);
+		rangeAxis.setTickUnit(numero);
+		rangeAxis.setRange(ymin - divisionY, ymax + divisionY);
 	}
 
 	// configuramos las líneas de las series (añadimos un círculo en los puntos
 	// y asignamos el color de cada serie)
 	private void configurarRendered(XYLineAndShapeRenderer renderer) {
-		renderer.setSeriesShapesVisible(2, false);
+		renderer.setSeriesShapesVisible(0, false);
+		renderer.setSeriesLinesVisible(0, true);
 		if (mostrarPuntos) {
-			renderer.setSeriesShapesVisible(3, true);
-			renderer.setSeriesLinesVisible(3, false);
+			renderer.setSeriesShapesVisible(1, true);
+			renderer.setSeriesLinesVisible(1, false);
 		}
-		renderer.setSeriesShapesVisible(0, false);
-		renderer.setSeriesShapesVisible(1, false);
-//		renderer.setSeriesLinesVisible(1, false);
-		renderer.setSeriesPaint(0, COLOR_SERIE_1);
-		renderer.setSeriesPaint(1, COLOR_SERIE_2);
+		// renderer.setSeriesShapesVisible(0, false);
+		// renderer.setSeriesShapesVisible(1, false);
+		// renderer.setSeriesLinesVisible(1, false);
+		// renderer.setSeriesPaint(0, COLOR_SERIE_1);
+		// renderer.setSeriesPaint(1, COLOR_SERIE_2);
 
-		renderer.setSeriesShapesVisible(0, false);
-		renderer.setSeriesShapesVisible(1, false);
-		renderer.setSeriesPaint(0, Color.BLACK);
-		renderer.setSeriesPaint(1, Color.BLACK);
+		// renderer.setSeriesShapesVisible(0, false);
+		// renderer.setSeriesShapesVisible(1, false);
+		// renderer.setSeriesPaint(0, Color.BLACK);
+		// renderer.setSeriesPaint(1, Color.BLACK);
 	}
 }

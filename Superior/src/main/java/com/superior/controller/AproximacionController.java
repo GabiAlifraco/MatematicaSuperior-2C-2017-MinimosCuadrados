@@ -28,24 +28,33 @@ public class AproximacionController implements IAproximacionController {
 
 			double xminimo = 0, yminimo = 0;
 			double xmaximo = 0, ymaximo = 0;
+			boolean controlPrimeraVez = false;
 			for (AproxData punto : puntosFuncion) {
 				x.add(punto.x());
 				y.add(punto.y());
 
-				if (xminimo > punto.x()) {
+				if (controlPrimeraVez == false) {
 					xminimo = punto.x();
-				}
-
-				if (xmaximo < punto.x()) {
 					xmaximo = punto.x();
-				}
-
-				if (yminimo > punto.y()) {
 					yminimo = punto.y();
-				}
-
-				if (ymaximo < punto.y()) {
 					ymaximo = punto.y();
+					controlPrimeraVez = true;
+				} else {
+					if (xminimo > punto.x()) {
+						xminimo = punto.x();
+					}
+
+					if (xmaximo < punto.x()) {
+						xmaximo = punto.x();
+					}
+
+					if (yminimo > punto.y()) {
+						yminimo = punto.y();
+					}
+
+					if (ymaximo < punto.y()) {
+						ymaximo = punto.y();
+					}
 				}
 			}
 
@@ -86,44 +95,61 @@ public class AproximacionController implements IAproximacionController {
 
 			double xminimo = 0, yminimo = 0;
 			double xmaximo = 0, ymaximo = 0;
+			boolean controlPrimeraVez = false;
 			for (AproxData punto : puntosFuncion) {
 				x.add(punto.x());
 				y.add(punto.y());
 
-				if (xminimo > punto.x()) {
+				if (controlPrimeraVez == false) {
 					xminimo = punto.x();
-				}
-
-				if (xmaximo < punto.x()) {
 					xmaximo = punto.x();
-				}
-
-				if (yminimo > punto.y()) {
 					yminimo = punto.y();
+					ymaximo = punto.y();
+					controlPrimeraVez = true;
+				} else {
+					if (xminimo > punto.x()) {
+						xminimo = punto.x();
+					}
+					if (xmaximo < punto.x()) {
+						xmaximo = punto.x();
+					}
+					if (yminimo > punto.y()) {
+						yminimo = punto.y();
+					}
+					if (ymaximo < punto.y()) {
+						ymaximo = punto.y();
+					}
 				}
 
-				if (ymaximo < punto.y()) {
-					ymaximo = punto.y();
-				}
 			}
+
+			controlPrimeraVez = false;
 			for (AproxData punto : datos.getDatos()) {
 				yCoordenada.add(punto.y());
 				xCoordenada.add(punto.x());
 
-				if (xCoorminimo > punto.x()) {
+				if (controlPrimeraVez == false) {
+					controlPrimeraVez = true;
 					xCoorminimo = punto.x();
-				}
-
-				if (xCoormaximo < punto.x()) {
 					xCoormaximo = punto.x();
-				}
-
-				if (yCoorminimo > punto.y()) {
 					yCoorminimo = punto.y();
-				}
-
-				if (yCoormaximo < punto.y()) {
 					yCoormaximo = punto.y();
+				} else {
+					if (xCoorminimo > punto.x()) {
+						xCoorminimo = punto.x();
+					}
+
+					if (xCoormaximo < punto.x()) {
+						xCoormaximo = punto.x();
+					}
+
+					if (yCoorminimo > punto.y()) {
+						yCoorminimo = punto.y();
+					}
+
+					if (yCoormaximo < punto.y()) {
+						yCoormaximo = punto.y();
+					}
 				}
 			}
 
@@ -135,7 +161,9 @@ public class AproximacionController implements IAproximacionController {
 			double divisionX = division(xMinimoReal, xMaximoReal);
 			double divisionY = division(yMinimoReal, yMaximoReal);
 			new GraficoFuncionConCoordenadas(x, y, xCoordenada, yCoordenada, divisionX, divisionY, xCoorminimo, xCoormaximo, yCoorminimo, yCoormaximo, true);
-		} catch (Exception e) {
+		} catch (
+
+		Exception e) {
 			if (aproximacion != null) {
 				JOptionPane.showMessageDialog(null, "No se puede calcular la aproximacion " + aproximacion.getNombre() + " con los datos ingresados");
 			}
@@ -144,6 +172,9 @@ public class AproximacionController implements IAproximacionController {
 
 	private Double division(double minimo, double maximo) {
 		double diferencia = Math.abs(minimo - maximo);
+		if (diferencia < 0.001) {
+			return diferencia / 5;
+		}
 		if (diferencia < 1) {
 			return 0.1;
 		}
@@ -159,7 +190,7 @@ public class AproximacionController implements IAproximacionController {
 		return diferencia / 20;
 	}
 
-	public void compararErrorFunciones(VerComparacionForm form,int decimales) {
+	public void compararErrorFunciones(VerComparacionForm form, int decimales) {
 		List<AproximacionOperaciones> aproximacionesElegidas = obtenerAproximacionesElegidas(form);
 
 		if (aproximacionesElegidas == null)
@@ -178,19 +209,19 @@ public class AproximacionController implements IAproximacionController {
 				columnasValores.add(aproximacion.obtenerColumnaFuncionAplicada());
 				columnasErrores.add(aproximacion.obtenerColumnaErrores());
 				cabecera[indiceCabecara] = aproximacion.getNombre();
-				cabecera[indiceCabecara + aproximacionesElegidas.size()] = "E. "+ aproximacion.getNombre();
+				cabecera[indiceCabecara + aproximacionesElegidas.size()] = "E. " + aproximacion.getNombre();
 				indiceCabecara++;
 			}
 			int cantidadFilas = form.getTV().getDatos().size();
 			String[][] tabla = new String[cantidadFilas][3 + (2 * aproximacionesElegidas.size())];
 			for (int i = 0; i < cantidadFilas; i++) {
 				tabla[i][0] = i + 1 + "";
-				tabla[i][1] =NumberUtils.formatter(form.getTV().getDatos().get(i).x(),decimales);
-				tabla[i][2] =NumberUtils.formatter( form.getTV().getDatos().get(i).y(),decimales);
+				tabla[i][1] = NumberUtils.formatter(form.getTV().getDatos().get(i).x(), decimales);
+				tabla[i][2] = NumberUtils.formatter(form.getTV().getDatos().get(i).y(), decimales);
 				for (int j = 0; j < columnasErrores.size(); j++) {
 
-					tabla[i][j + 3] = NumberUtils.formatter(columnasValores.get(j).get(i),decimales);
-					tabla[i][j + 3 + aproximacionesElegidas.size()] = NumberUtils.formatter(columnasErrores.get(j).get(i),decimales);
+					tabla[i][j + 3] = NumberUtils.formatter(columnasValores.get(j).get(i), decimales);
+					tabla[i][j + 3 + aproximacionesElegidas.size()] = NumberUtils.formatter(columnasErrores.get(j).get(i), decimales);
 				}
 			}
 			DefaultTableModel dtm = new DefaultTableModel(tabla, cabecera);

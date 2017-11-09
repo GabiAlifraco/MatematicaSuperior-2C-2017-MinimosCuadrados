@@ -1,5 +1,9 @@
 package com.superior.model;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
 import com.superior.calculo.EcuacionDosIncognitasUtils;
 import com.superior.calculo.NumberUtils;
 import com.superior.model.dto.AproxBase;
@@ -29,7 +33,7 @@ public class AproxHiperbola extends AproxBase implements AproximacionOperaciones
 	}
 
 	public String[] obtenerFilaSumarizadora() {
-		return new String[] { "\u03A3",NumberUtils.formatter(tablaValores.sumatoriaX(), cantidadDecimales), NumberUtils.formatter(tablaValores.sumatoriaY(), cantidadDecimales), NumberUtils.formatter(tablaValores.sumatoriaXCuadrado(), cantidadDecimales), NumberUtils.formatter(tablaValores.sumatoriaInversaY(), cantidadDecimales),NumberUtils.formatter( tablaValores.sumatoriaXInversaY(), cantidadDecimales) };
+		return new String[] { "\u03A3", NumberUtils.formatter(tablaValores.sumatoriaX(), cantidadDecimales), NumberUtils.formatter(tablaValores.sumatoriaY(), cantidadDecimales), NumberUtils.formatter(tablaValores.sumatoriaXCuadrado(), cantidadDecimales), NumberUtils.formatter(tablaValores.sumatoriaInversaY(), cantidadDecimales), NumberUtils.formatter(tablaValores.sumatoriaXInversaY(), cantidadDecimales) };
 	}
 
 	public String[] tablaCabecera() {
@@ -68,6 +72,33 @@ public class AproxHiperbola extends AproxBase implements AproximacionOperaciones
 	protected Double funcion(double valorX) {
 
 		return A / (valorX + B);
+	}
+
+	@Override
+	public List<AproxData> obtenerPuntosFuncionAproximacionParaGraficar() throws Exception {
+		List<AproxData> puntosGrafica = new ArrayList<AproxData>();
+		Collections.sort(tablaValores.getDatos());
+		AproxData puntoMinimo = tablaValores.getDatos().get(0);
+		AproxData puntoMaximo = tablaValores.getDatos().get(tablaValores.getDatos().size() - 1);
+
+		double tope = puntoMaximo.x();
+		double i = puntoMinimo.x();
+		double incrementoX = Math.abs((tope - i)) / 5;
+		this.calcularFuncionAproximacion();
+		double asintotaVertical = (-1) * this.B.doubleValue();
+		while (i <= tope) {
+			Double x = i;
+			if (!(x >= asintotaVertical - incrementoX && x <= asintotaVertical + incrementoX)) {
+				Double y = aplicarFuncion(x);
+				AproxData puntoGrafica = new AproxData(x, y, cantidadDecimales);
+				puntosGrafica.add(puntoGrafica);
+			}
+			i += incrementoX;
+		}
+		Double y = aplicarFuncion(i);
+		AproxData puntoGrafica = new AproxData(i, y, cantidadDecimales);
+		puntosGrafica.add(puntoGrafica);
+		return puntosGrafica;
 	}
 
 }

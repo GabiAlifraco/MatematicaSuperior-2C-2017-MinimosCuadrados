@@ -77,12 +77,13 @@ public abstract class AproxBase implements Comparable<AproximacionOperaciones> {
 		Collections.sort(tablaValores.getDatos());
 		AproxData puntoMinimo = tablaValores.getDatos().get(0);
 		AproxData puntoMaximo = tablaValores.getDatos().get(tablaValores.getDatos().size() - 1);
-
-		double incrementoX = 0.20;
+		
+	
 //		int tope = (int) (Math.abs((puntoMinimo.x() - puntoMaximo.x())) * 4);
 //		incrementoX = Math.abs((puntoMinimo.x() - puntoMaximo.x())) / tope;
 		double tope = puntoMaximo.x();
 		double i = puntoMinimo.x();
+		double incrementoX = Math.abs((tope-i)) / 5;
 		while( i <= tope) {
 			Double x = i  ;
 			Double y = aplicarFuncion(x);

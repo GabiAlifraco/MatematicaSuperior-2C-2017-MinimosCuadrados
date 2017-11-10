@@ -117,7 +117,7 @@ public class AproxHiperbola extends AproxBase implements AproximacionOperaciones
 		Collections.sort(tablaValores.getDatos());
 		AproxData puntoMinimo = tablaValores.getDatos().get(0);
 		AproxData puntoMaximo = tablaValores.getDatos().get(tablaValores.getDatos().size() - 1);
-		
+		Double yMaximo = obtenerYMaximo();
 		
 		double tope = puntoMaximo.x();
 		double i = puntoMinimo.x();
@@ -127,7 +127,7 @@ public class AproxHiperbola extends AproxBase implements AproximacionOperaciones
 			Double x = i;
 			Double y = aplicarFuncion(x);
 			double asintotaVertical = (-1) * this.B.doubleValue();
-			if (y <= puntoMaximo.y()) {				
+			if (y <= yMaximo) {				
 				if (x < asintotaVertical) {
 					grafico = 1;
 				} else if (x > asintotaVertical) {
@@ -139,7 +139,7 @@ public class AproxHiperbola extends AproxBase implements AproximacionOperaciones
 			i += incrementoX;
 		}
 		Double y = aplicarFuncion(i);
-		if (y <= puntoMaximo.y()) {
+		if (y <= yMaximo) {
 			AproxData puntoGrafica = new AproxData(i, y, cantidadDecimales,grafico);
 			puntosGrafica.add(puntoGrafica);
 		}

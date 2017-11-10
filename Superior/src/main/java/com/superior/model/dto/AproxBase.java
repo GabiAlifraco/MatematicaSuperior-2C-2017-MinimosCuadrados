@@ -72,12 +72,47 @@ public abstract class AproxBase implements Comparable<AproximacionOperaciones> {
 		}
 	}
 
+	protected Double obtenerYMaximo() {
+		List<AproxData> datos = tablaValores.getDatos();
+		Double maximo = 0D;
+		boolean controlPrimeraVez = true;
+		for (AproxData dato : datos) {
+			if (controlPrimeraVez) {
+				maximo = dato.y();
+				controlPrimeraVez = false;
+			} else {
+				if (maximo < dato.y()) {
+					maximo = dato.y();
+				}
+			}
+		}
+		return maximo;
+	}
+
+	protected Double obtenerYMinimo() {
+		List<AproxData> datos = tablaValores.getDatos();
+		Double minimo = 0D;
+		boolean controlPrimeraVez = true;
+		for (AproxData dato : datos) {
+			if (controlPrimeraVez) {
+				minimo = dato.y();
+				controlPrimeraVez = false;
+			} else {
+				if (minimo > dato.y()) {
+					minimo = dato.y();
+				}
+			}
+		}
+		return minimo;
+	}
+
 	public List<AproxData> obtenerPuntosFuncionAproximacionParaGraficar() throws Exception {
 		List<AproxData> puntosGrafica = new ArrayList<AproxData>();
 		Collections.sort(tablaValores.getDatos());
 		AproxData puntoMinimo = tablaValores.getDatos().get(0);
 		AproxData puntoMaximo = tablaValores.getDatos().get(tablaValores.getDatos().size() - 1);
-
+		Double yMaximo = obtenerYMaximo();
+		Double yMinimo = obtenerYMinimo();
 		// int tope = (int) (Math.abs((puntoMinimo.x() - puntoMaximo.x())) * 4);
 		// incrementoX = Math.abs((puntoMinimo.x() - puntoMaximo.x())) / tope;
 		double tope = puntoMaximo.x();
@@ -86,14 +121,14 @@ public abstract class AproxBase implements Comparable<AproximacionOperaciones> {
 		while (i <= tope) {
 			Double x = i;
 			Double y = aplicarFuncion(x);
-			if (y <= puntoMaximo.y()) {
+			if ((yMinimo <= y) && (y <= yMaximo)) {
 				AproxData puntoGrafica = new AproxData(x, y, cantidadDecimales);
 				puntosGrafica.add(puntoGrafica);
 			}
 			i += incrementoX;
 		}
 		Double y = aplicarFuncion(i);
-		if (y <= puntoMaximo.y()) {
+		if ((yMinimo <= y) && (y <= yMaximo)) {
 			AproxData puntoGrafica = new AproxData(i, y, cantidadDecimales);
 			puntosGrafica.add(puntoGrafica);
 		}

@@ -77,25 +77,30 @@ public abstract class AproxBase implements Comparable<AproximacionOperaciones> {
 		Collections.sort(tablaValores.getDatos());
 		AproxData puntoMinimo = tablaValores.getDatos().get(0);
 		AproxData puntoMaximo = tablaValores.getDatos().get(tablaValores.getDatos().size() - 1);
-		
-	
-//		int tope = (int) (Math.abs((puntoMinimo.x() - puntoMaximo.x())) * 4);
-//		incrementoX = Math.abs((puntoMinimo.x() - puntoMaximo.x())) / tope;
+
+		// int tope = (int) (Math.abs((puntoMinimo.x() - puntoMaximo.x())) * 4);
+		// incrementoX = Math.abs((puntoMinimo.x() - puntoMaximo.x())) / tope;
 		double tope = puntoMaximo.x();
 		double i = puntoMinimo.x();
-		double incrementoX = Math.abs((tope-i)) / 5;
-		while( i <= tope) {
-			Double x = i  ;
+		double incrementoX = Math.abs((tope - i)) / this.cantidadDivisiones();
+		while (i <= tope) {
+			Double x = i;
 			Double y = aplicarFuncion(x);
-			AproxData puntoGrafica = new AproxData(x, y, cantidadDecimales);
-			puntosGrafica.add(puntoGrafica);
-			i+=incrementoX;
+			if (y <= puntoMaximo.y()) {
+				AproxData puntoGrafica = new AproxData(x, y, cantidadDecimales);
+				puntosGrafica.add(puntoGrafica);
+			}
+			i += incrementoX;
 		}
 		Double y = aplicarFuncion(i);
-		AproxData puntoGrafica = new AproxData(i, y, cantidadDecimales);
-		puntosGrafica.add(puntoGrafica);
+		if (y <= puntoMaximo.y()) {
+			AproxData puntoGrafica = new AproxData(i, y, cantidadDecimales);
+			puntosGrafica.add(puntoGrafica);
+		}
 		return puntosGrafica;
 	}
+
+	public abstract double cantidadDivisiones();
 
 	public Double aplicarFuncion(Double x) throws Exception {
 		if (A == null || B == null) {

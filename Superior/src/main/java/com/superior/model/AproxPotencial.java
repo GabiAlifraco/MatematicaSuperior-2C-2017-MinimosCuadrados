@@ -67,4 +67,10 @@ public class AproxPotencial extends AproxBase implements AproximacionOperaciones
 
 	}
 
+	@Override
+	public double cantidadDivisiones() {
+		
+		return 50;
+	}
+
 }

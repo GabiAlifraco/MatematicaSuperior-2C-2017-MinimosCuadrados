@@ -74,31 +74,82 @@ public class AproxHiperbola extends AproxBase implements AproximacionOperaciones
 		return A / (valorX + B);
 	}
 
-	@Override
+//	@Override
+//	public List<AproxData> obtenerPuntosFuncionAproximacionParaGraficar() throws Exception {
+//		List<AproxData> puntosGrafica = new ArrayList<AproxData>();
+//		Collections.sort(tablaValores.getDatos());
+//		AproxData puntoMinimo = tablaValores.getDatos().get(0);
+//		AproxData puntoMaximo = tablaValores.getDatos().get(tablaValores.getDatos().size() - 1);
+//
+//		double tope = puntoMaximo.x();
+//		double i = puntoMinimo.x();
+//		double incrementoX = Math.abs((tope - i)) / cantidadDivisiones();
+//		this.calcularFuncionAproximacion();
+//		double asintotaVertical = (-1) * this.B.doubleValue();
+//		while (i <= tope) {
+//			Double x = i;
+//			int grafico = 1;
+//			if (x < asintotaVertical) {
+//				grafico = 1;
+//				Double y = aplicarFuncion(x);
+//				if (y < puntoMaximo.y()) {
+//					AproxData puntoGrafica = new AproxData(x, y, cantidadDecimales, grafico);
+//					puntosGrafica.add(puntoGrafica);
+//					System.out.println("grafico " + grafico + " - (" + x + "," + y + ")");
+//				}
+//
+//			} else if (x > asintotaVertical) {
+//				// grafico = 1;
+//				// Double y = aplicarFuncion(x);
+//				// AproxData puntoGrafica = new AproxData(x, y,
+//				// cantidadDecimales, grafico);
+//				// puntosGrafica.add(puntoGrafica);
+//				// System.out.println("grafico "+grafico+" - ("+x+","+y+")");
+//			}
+//			i += incrementoX;
+//		}
+//
+//		return puntosGrafica;
+//	}
+	
 	public List<AproxData> obtenerPuntosFuncionAproximacionParaGraficar() throws Exception {
 		List<AproxData> puntosGrafica = new ArrayList<AproxData>();
 		Collections.sort(tablaValores.getDatos());
 		AproxData puntoMinimo = tablaValores.getDatos().get(0);
 		AproxData puntoMaximo = tablaValores.getDatos().get(tablaValores.getDatos().size() - 1);
-
+		
+		
 		double tope = puntoMaximo.x();
 		double i = puntoMinimo.x();
-		double incrementoX = Math.abs((tope - i)) / 5;
-		this.calcularFuncionAproximacion();
-		double asintotaVertical = (-1) * this.B.doubleValue();
+		double incrementoX = Math.abs((tope - i)) / this.cantidadDivisiones();
+		int grafico = 1;
 		while (i <= tope) {
 			Double x = i;
-			if (!(x >= asintotaVertical - incrementoX && x <= asintotaVertical + incrementoX)) {
-				Double y = aplicarFuncion(x);
-				AproxData puntoGrafica = new AproxData(x, y, cantidadDecimales);
+			Double y = aplicarFuncion(x);
+			double asintotaVertical = (-1) * this.B.doubleValue();
+			if (y <= puntoMaximo.y()) {				
+				if (x < asintotaVertical) {
+					grafico = 1;
+				} else if (x > asintotaVertical) {
+					grafico = 2;
+				}
+				AproxData puntoGrafica = new AproxData(x, y, cantidadDecimales,grafico);
 				puntosGrafica.add(puntoGrafica);
 			}
 			i += incrementoX;
 		}
 		Double y = aplicarFuncion(i);
-		AproxData puntoGrafica = new AproxData(i, y, cantidadDecimales);
-		puntosGrafica.add(puntoGrafica);
+		if (y <= puntoMaximo.y()) {
+			AproxData puntoGrafica = new AproxData(i, y, cantidadDecimales,grafico);
+			puntosGrafica.add(puntoGrafica);
+		}
 		return puntosGrafica;
+	}
+
+	@Override
+	public double cantidadDivisiones() {
+
+		return 50;
 	}
 
 }

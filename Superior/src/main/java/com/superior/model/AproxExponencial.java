@@ -67,4 +67,10 @@ public class AproxExponencial extends AproxBase implements AproximacionOperacion
 
 	}
 
+	@Override
+	public double cantidadDivisiones() {
+		
+		return 30;
+	}
+
 }

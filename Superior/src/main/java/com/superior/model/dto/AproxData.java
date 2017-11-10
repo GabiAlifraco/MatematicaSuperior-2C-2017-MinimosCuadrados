@@ -8,12 +8,32 @@ public class AproxData implements Comparable<AproxData> {
 
 	private NumberUtils num = new NumberUtils();
 	private int cantidadDecimales;
+	
+	private int grafico=1;
 
 	public AproxData(double x, double y, int cantidadDecimales) {
 		this.x = x;
 		this.y = y;
 		this.cantidadDecimales = cantidadDecimales;
 	}
+	
+	
+
+	public int getGrafico() {
+		return grafico;
+	}
+
+
+
+	public AproxData(Double x, Double y, int cantidadDecimales, int grafico) {
+		super();
+		this.x = x;
+		this.y = y;
+		this.cantidadDecimales = cantidadDecimales;
+		this.grafico = grafico;
+	}
+
+
 
 	public Double x() {
 		return num.redondear(x, cantidadDecimales);

@@ -74,4 +74,10 @@ public class AproxParabola extends AproxBase implements AproximacionOperaciones 
 		return A * Math.pow(valorX, 2) + valorX * B + C;
 	}
 
+	@Override
+	public double cantidadDivisiones() {
+		
+		return 30;
+	}
+
 }

@@ -63,4 +63,10 @@ public class AproxLineal extends AproxBase implements AproximacionOperaciones {
 
 	}
 
+	@Override
+	public double cantidadDivisiones() {
+
+		return 5;
+	}
+
 }

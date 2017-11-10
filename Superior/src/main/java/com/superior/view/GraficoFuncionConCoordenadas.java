@@ -32,6 +32,7 @@ public class GraficoFuncionConCoordenadas extends javax.swing.JFrame {
 	BufferedImage grafica = null;
 	List<Double> x;
 	List<Double> y;
+	List<Integer> grafico;
 
 	private Boolean mostrarPuntos;
 
@@ -47,9 +48,11 @@ public class GraficoFuncionConCoordenadas extends javax.swing.JFrame {
 	private static Color COLOR_RECUADROS_GRAFICA = new Color(31, 87, 4);
 
 	private static Color COLOR_FONDO_GRAFICA = Color.white;
+	private int cantidadDecimales;
 
-	public GraficoFuncionConCoordenadas(List<Double> xFuncionAprox, List<Double> yFuncionAprox, List<Double> xCoordenada, List<Double> yCoordenada, double divisionX, double divisionY, double xminimo, double xmaximo, double yminimo, double ymaximo, boolean mostrarPuntos) {
+	public GraficoFuncionConCoordenadas(List<Double> xFuncionAprox, List<Double> yFuncionAprox, List<Double> xCoordenada, List<Double> yCoordenada, double divisionX, double divisionY, double xminimo, double xmaximo, double yminimo, double ymaximo, boolean mostrarPuntos, int cantidadDecimales, List<Integer> grafico) {
 		super("GRAFICO COMPARATIVO");
+		this.cantidadDecimales = cantidadDecimales;
 		this.x = xFuncionAprox;
 		this.y = yFuncionAprox;
 		this.xCoordenada = xCoordenada;
@@ -69,13 +72,20 @@ public class GraficoFuncionConCoordenadas extends javax.swing.JFrame {
 		this.xmaximo = xmaximo;
 		this.yminimo = yminimo;
 		this.ymaximo = ymaximo;
+		this.grafico = grafico;
 	}
+
+	final XYSeries serie1 = new XYSeries("Función Aproximada");
+	final XYSeries serie1Hiper = new XYSeries(" ");
 
 	public BufferedImage creaImagen() {
 
-		final XYSeries serie1 = new XYSeries("Función Aproximada");
 		for (int i = 0; i < x.size(); i++) {
-			serie1.add(x.get(i), y.get(i));
+			if (grafico.get(i) == 1) {
+				serie1.add(x.get(i), y.get(i));
+			} else if (grafico.get(i) == 2) {
+				serie1Hiper.add(x.get(i), y.get(i));
+			}
 		}
 
 		final XYSeriesCollection collection = new XYSeriesCollection();
@@ -89,6 +99,9 @@ public class GraficoFuncionConCoordenadas extends javax.swing.JFrame {
 			collection.addSeries(serie2);
 		}
 
+		if(!serie1Hiper.isEmpty()){
+			collection.addSeries(serie1Hiper);
+		}
 		JFreeChart chart = crearGrafica(collection);
 
 		BufferedImage image = chart.createBufferedImage(500, 500);
@@ -145,7 +158,7 @@ public class GraficoFuncionConCoordenadas extends javax.swing.JFrame {
 
 		domainAxis.setStandardTickUnits(NumberAxis.createIntegerTickUnits());
 		NumberFormat numerFormat = NumberFormat.getInstance();
-		numerFormat.setMaximumFractionDigits(10);
+		numerFormat.setMaximumFractionDigits(cantidadDecimales);
 		NumberTickUnit numero = new NumberTickUnit(division, numerFormat);
 		domainAxis.setTickUnit(numero);
 		domainAxis.setRange(xmin - divisionX, xmax + divisionX);
@@ -157,7 +170,7 @@ public class GraficoFuncionConCoordenadas extends javax.swing.JFrame {
 
 		rangeAxis.setStandardTickUnits(NumberAxis.createIntegerTickUnits());
 		NumberFormat numerFormat = NumberFormat.getInstance();
-		numerFormat.setMaximumFractionDigits(10);
+		numerFormat.setMaximumFractionDigits(cantidadDecimales);
 		NumberTickUnit numero = new NumberTickUnit(division, numerFormat);
 		rangeAxis.setTickUnit(numero);
 		rangeAxis.setRange(ymin - divisionY, ymax + divisionY);
@@ -171,6 +184,12 @@ public class GraficoFuncionConCoordenadas extends javax.swing.JFrame {
 		if (mostrarPuntos) {
 			renderer.setSeriesShapesVisible(1, true);
 			renderer.setSeriesLinesVisible(1, false);
+		}
+		
+		
+		if(!serie1Hiper.isEmpty()){
+			renderer.setSeriesShapesVisible(2, false);
+			renderer.setSeriesLinesVisible(2, true);
 		}
 		// renderer.setSeriesShapesVisible(0, false);
 		// renderer.setSeriesShapesVisible(1, false);

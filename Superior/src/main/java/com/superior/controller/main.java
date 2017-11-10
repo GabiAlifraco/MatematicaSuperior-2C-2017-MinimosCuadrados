@@ -1,12 +1,11 @@
 package com.superior.controller;
 
-import com.superior.model.dto.AproxTable;
-import com.superior.view.AproximacionPantalla;
 import com.superior.view.PantallaPrincipal;
 
 public class main {
 
 	public static void main(final String[] args) {
+
 		// AproxTable aprox = new AproxTable(3);
 		// aprox.agregarPunto(1, 7);
 		// aprox.agregarPunto(2, 30);
@@ -18,7 +17,6 @@ public class main {
 		//
 		// new AproximacionPantalla(aprox,3);
 		new PantallaPrincipal();
-
 	}
 
 }
